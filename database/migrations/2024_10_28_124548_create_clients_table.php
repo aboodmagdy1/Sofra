@@ -15,7 +15,7 @@ class CreateClientsTable extends Migration
 			$table->string('name');
 			$table->string('email');
 			$table->string('phone');
-			$table->integer('distric_id')->unsigned();
+			$table->integer('district_id')->unsigned();
 			$table->string('password');
 		});
 	}
