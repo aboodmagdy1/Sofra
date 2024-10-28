@@ -3,13 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Client extends Model 
+class Client extends  Authenticatable
 {
+
+    use HasApiTokens;
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable = array('name', 'email', 'distric_id', 'password');
+    protected $fillable = ['name', 'email', 'district_id', 'password', 'phone'];
+    protected $hidden = ['password'];
 
     public function reviews()
     {
@@ -30,5 +35,4 @@ class Client extends Model
     {
         return $this->belongsTo('App\Models\District');
     }
-
 }
