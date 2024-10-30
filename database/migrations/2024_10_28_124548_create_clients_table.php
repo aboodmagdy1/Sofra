@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
 			$table->string('phone');
 			$table->integer('district_id')->unsigned();
 			$table->string('password');
+			$table->string('reset_code')->nullable();
 		});
 	}
 

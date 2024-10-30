@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class Client extends  Authenticatable
@@ -13,8 +14,8 @@ class Client extends  Authenticatable
 
     protected $table = 'clients';
     public $timestamps = true;
-    protected $fillable = ['name', 'email', 'district_id', 'password', 'phone'];
-    protected $hidden = ['password'];
+    protected $fillable = ['name', 'email', 'district_id', 'password', 'phone', 'reset_code'];
+    protected $hidden = ['password', 'reset_code'];
 
     public function reviews()
     {
@@ -34,5 +35,10 @@ class Client extends  Authenticatable
     public function district()
     {
         return $this->belongsTo('App\Models\District');
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
     }
 }

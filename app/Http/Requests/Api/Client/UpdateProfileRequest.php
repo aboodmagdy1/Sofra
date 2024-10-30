@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user() ? true : false;
     }
 
     /**
@@ -22,11 +23,10 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:clients,email',
-            'phone' => 'required|string|unique:clients,phone',
-            'password' => 'required|confirmed',
-            'district_id' => ['required', 'exists:districts,id']
+            'name' => 'string',
+            'email' => ['emai', Rule::unique('clients', 'email')->ignore($this->user()->id)],
+            'phone' => ['emai', Rule::unique('clients', 'phone')->ignore($this->user()->id)],
+            'district_id' => ['exists:districts,id']
         ];
     }
 }
