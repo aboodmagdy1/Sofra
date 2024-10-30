@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Restaurant extends Model 
+
+class Restaurant extends Authenticatable
 {
-
+    use HasApiTokens;
     protected $table = 'restaurants';
     public $timestamps = true;
-    protected $fillable = array('status', 'name', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'mobile', 'watts_number', 'image');
-
+    protected $fillable = array('status', 'name', 'phone', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'contact_num', 'watts_num', 'image', 'password', 'reset_code', 'email');
+    protected $hidden = ['password', 'reset_code'];
     public function district()
     {
         return $this->belongsTo('App\Models\District');
@@ -46,4 +50,9 @@ class Restaurant extends Model
         return $this->hasMany('App\Models\Offer');
     }
 
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }
