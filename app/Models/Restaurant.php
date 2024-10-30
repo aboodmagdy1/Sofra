@@ -50,6 +50,12 @@ class Restaurant extends Authenticatable
         return $this->hasMany('App\Models\Offer');
     }
 
+    public function notifications()
+    {
+        return $this->morphToMany('App\Models\Notification', 'notifiable');
+    }
+
+
 
     public function setPasswordAttribute($value)
     {

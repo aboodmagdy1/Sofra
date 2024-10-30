@@ -4,16 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model 
+class Notification extends Model
 {
 
-    protected $table = 'notificatinos';
+    protected $table = 'notifications';
     public $timestamps = true;
-    protected $fillable = array('title', 'body');
+    protected $fillable = array('title', 'body', 'is_read', 'notifyiable');
 
     public function clients()
     {
-        return $this->belongsToMany('App\Models\Client');
+        return $this->morphedByMany('App\Models\Client', 'notifiable');
     }
 
+    public function restaurants()
+    {
+        return $this->morphedByMany('App\Models\Restaurant', 'notifiable');
+    }
 }

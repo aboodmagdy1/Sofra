@@ -14,6 +14,8 @@ class CreateReviewsTable extends Migration
 			$table->timestamps();
 			$table->text('content');
 			$table->tinyInteger('rate');
+			$table->integer('restaurant_id')->unsigned();
+			$table->integer('client_id')->unsigned();
 		});
 	}
 

@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
 			$table->integer('payment_method_id')->unsigned();
 			$table->text('note');
 			$table->text('address');
-			$table->enum('state', array('pending', 'accepted', 'rejected', 'delivered', 'declined'));
+			$table->tinyInteger('status');
 		});
 	}
 

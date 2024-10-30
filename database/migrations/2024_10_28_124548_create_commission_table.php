@@ -13,8 +13,7 @@ class CreateCommissionTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->integer('resturant_id')->unsigned();
-			$table->decimal('total');
-			$table->decimal('payed');
+			$table->decimal('amount');
 			$table->text('details');
 		});
 	}

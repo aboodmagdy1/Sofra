@@ -9,11 +9,13 @@ class CreateNotificatinosTable extends Migration
 
 	public function up()
 	{
-		Schema::create('notificatinos', function (Blueprint $table) {
+		Schema::create('notifications', function (Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
 			$table->string('title');
 			$table->text('body');
+			$table->boolean('is_read');
+			$table->morphs('notifyiable');
 		});
 	}
 

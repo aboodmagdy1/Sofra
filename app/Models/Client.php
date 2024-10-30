@@ -29,7 +29,7 @@ class Client extends  Authenticatable
 
     public function notifications()
     {
-        return $this->belongsToMany('App\Models\Notification');
+        return $this->morphToMany('App\Models\Notification', 'notifiable');
     }
 
     public function district()

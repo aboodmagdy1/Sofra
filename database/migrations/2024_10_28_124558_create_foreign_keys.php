@@ -20,6 +20,17 @@ class CreateForeignKeys extends Migration
 				->onDelete('no action')
 				->onUpdate('no action');
 		});
+		Schema::table('reviews', function (Blueprint $table) {
+			$table->foreign('restaurant_id')->references('id')->on('restaurants')
+				->onDelete('no action')
+				->onUpdate('no action');
+		});
+		Schema::table('reviews', function (Blueprint $table) {
+			$table->foreign('client_id')->references('timestamps')->on('clients')
+				->onDelete('no action')
+				->onUpdate('no action');
+		});
+
 		Schema::table('meals', function (Blueprint $table) {
 			$table->foreign('restaurant_id')->references('id')->on('restaurants')
 				->onDelete('no action')
@@ -83,6 +94,13 @@ class CreateForeignKeys extends Migration
 		Schema::table('meals', function (Blueprint $table) {
 			$table->dropForeign('meals_restaurant_id_foreign');
 		});
+		Schema::table('reviews', function (Blueprint $table) {
+			$table->dropForeign('reviews_restaurant_id_foreign');
+		});
+		Schema::table('reviews', function (Blueprint $table) {
+			$table->dropForeign('reviews_client_id_foreign');
+		});
+
 		Schema::table('clients', function (Blueprint $table) {
 			$table->dropForeign('clients_district_id_foreign');
 		});
