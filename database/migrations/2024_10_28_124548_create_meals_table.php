@@ -13,8 +13,8 @@ class CreateMealsTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->string('name');
-			$table->decimal('price', 10, 8);
-			$table->decimal('offer_price', 10, 8);
+			$table->decimal('price');
+			$table->decimal('offer_price');
 			$table->integer('ready_time');
 			$table->text('description');
 			$table->integer('restaurant_id')->unsigned();

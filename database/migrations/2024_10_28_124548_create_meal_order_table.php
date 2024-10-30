@@ -16,7 +16,7 @@ class CreateMealOrderTable extends Migration
 			$table->integer('meal_id')->unsigned();
 			$table->integer('order_id')->unsigned();
 			$table->text('special_note');
-			$table->decimal('meal_price', 10, 8);
+			$table->decimal('meal_price');
 		});
 	}
 
