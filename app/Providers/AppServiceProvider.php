@@ -7,9 +7,11 @@ use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
 use App\Services\Client\ClientAuthService;
+use App\Services\Client\ClientService;
 use App\Services\Restaurant\MealService;
 use App\Services\Restaurant\OfferService;
 use App\Services\Restaurant\RestaurantAuthServuce;
+use App\Services\Restaurant\RestaurantService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RestaurantAuthServuce::class, function ($app) {
             return new RestaurantAuthServuce($app->make(RestaurantRepository::class));
         });
+        $this->app->singleton(RestaurantService::class, function ($app) {
+            return new RestaurantService($app->make(RestaurantRepository::class));
+        });
 
         $this->app->singleton(OfferService::class, function ($app) {
             return new OfferService($app->make(OfferRepository::class));
@@ -47,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(ClientAuthService::class, function ($app) {
             return new ClientAuthService($app->make(ClientRepository::class));
+        });
+
+
+        $this->app->singleton(ClientService::class, function ($app) {
+            return new ClientService($app->make(ClientRepository::class));
         });
     }
 
