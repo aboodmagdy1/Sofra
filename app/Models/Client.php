@@ -24,7 +24,7 @@ class Client extends  Authenticatable
 
     public function orders()
     {
-        return $this->hasMany('Order');
+        return $this->hasMany('App\Models\Order');
     }
 
     public function notifications()

@@ -3,11 +3,12 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRestaurantsTable extends Migration {
+class CreateRestaurantsTable extends Migration
+{
 
 	public function up()
 	{
-		Schema::create('restaurants', function(Blueprint $table) {
+		Schema::create('restaurants', function (Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
 			$table->boolean('status');
@@ -19,7 +20,7 @@ class CreateRestaurantsTable extends Migration {
 			$table->decimal('min_order_price');
 			$table->string('password');
 			$table->decimal('delivery_price');
-			$table->decimal('avg_rate');
+			$table->decimal('avg_rate')->nullable();
 			$table->string('image');
 			$table->string('reset_code')->nullable();
 			$table->integer('district_id')->unsigned();
