@@ -12,9 +12,15 @@ class BaseRepository implements BaseRepositoryInterface
         return   $this->model->all();
     }
 
-    public function filter($key, $value)
+    public function filter($filters)
     {
-        return $this->model->where($key, $value)->get();
+        $query = $this->model->query();
+        foreach ($filters as $key => $value) {
+            if (!is_null($value)) {
+                $query->where($key, $value);
+            }
+        }
+        return $query->get();
     }
 
     public function findBy($key, $value)

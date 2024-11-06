@@ -18,7 +18,7 @@ class MealService
 
     public function showMeals($restaurant_id)
     {
-        $meals = $this->repository->filter('restaurant_id', $restaurant_id);
+        $meals = $this->repository->filter(['restaurant_id' => $restaurant_id]);
         return serviceResponse(1, 'meals retrieved succefuly', ['meals' => $meals]);
     }
 

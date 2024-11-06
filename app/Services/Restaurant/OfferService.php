@@ -15,7 +15,7 @@ class OfferService
 
     public function showOffers()
     {
-        $records = $this->repository->filter('restaurant_id', request()->user()->id);
+        $records = $this->repository->filter(['restaurant_id' => request()->user()->id]);
         return serviceResponse(1, 'success', $records);
     }
 

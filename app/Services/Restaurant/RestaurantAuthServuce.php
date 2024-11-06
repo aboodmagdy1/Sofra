@@ -18,7 +18,7 @@ class RestaurantAuthServuce
 
     public function login(array $credentials)
     {
-        $restaurant = $this->repository->filter('email', $credentials['email'])->first();
+        $restaurant = $this->repository->filter(['email' => $credentials['email']])->first();
         if ($restaurant && Hash::check($credentials['password'], $restaurant->password)) {
             $restaurant->tokens()->delete();
 

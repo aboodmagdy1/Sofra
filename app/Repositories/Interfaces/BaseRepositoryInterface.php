@@ -7,7 +7,7 @@ interface BaseRepositoryInterface
 
     public function all();
 
-    public function filter($key, $value);
+    public function filter(array $filters);
     public function find($id);
 
     public function findBy($key, $value);
