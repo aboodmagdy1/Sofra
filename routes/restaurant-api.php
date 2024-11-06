@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Restaurant\AuthController;
 use App\Http\Controllers\Api\Restaurant\MealController;
 use App\Http\Controllers\Api\Restaurant\OfferController;
+use App\Http\Controllers\Api\Restaurant\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,6 +18,9 @@ Route::middleware('auth:sanctum')->controller(AuthController::class)->group(func
     // Auth 
     Route::post('/logout', 'logout');
     Route::patch('/profile', 'updateProfile');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
 
     // Restaurant ( must be authenticated)
     Route::controller(MealController::class)->group(function () {
