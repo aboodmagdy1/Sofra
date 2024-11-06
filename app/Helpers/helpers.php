@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('serviceResponse')) {
@@ -28,6 +29,16 @@ if (!function_exists('responseJson')) {
     }
 }
 
+if (!function_exists('settings')) {
+    function settings()
+    {
+        $settings = Setting::find(1);
+        if ($settings) {
+            return $settings;
+        }
+        return new Setting();
+    }
+}
 
 
 if (!function_exists('uploadImage')) {
