@@ -7,11 +7,14 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Offer;
+use App\Services\Restaurant\RestaurantService;
 use Illuminate\Http\Request;
 use function App\Helpers\responseJson;
 
 class GeneralController extends Controller
 {
+
+    public function __construct(private RestaurantService $service) {}
     public function cities()
     {
         $records = City::all();
@@ -37,5 +40,19 @@ class GeneralController extends Controller
     {
         $records = Offer::all();
         responseJson(1, 'success', $records);
+    }
+
+    public function list_restaurants()
+    {
+        $district_id = request()->district_id;
+        $name = request()->name;
+        $response = $this->service->list($district_id, $name);
+        return responseJson($response['status'], $response['message'], $response['data']);
+    }
+
+    public function show_restaurant($id)
+    {
+        $response = $this->service->show($id);
+        return responseJson($response['status'], $response['message'], $response['data']);
     }
 }
