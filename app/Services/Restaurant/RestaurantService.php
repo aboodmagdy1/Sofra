@@ -28,4 +28,15 @@ class RestaurantService
         }
         return serviceResponse(0, 'no data found', []);
     }
+
+
+    public function reviews()
+    {
+        $restaurant = $this->repository->find(request()->user()->id);
+        $reviews = $restaurant->reviews()->paginate(5);
+        if ($reviews) {
+            return serviceResponse(1, 'success', $reviews);
+        }
+        return serviceResponse(0, 'no data found', []);
+    }
 }

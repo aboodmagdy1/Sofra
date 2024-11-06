@@ -38,7 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::controller(RestaurantController::class)->group(function () {
-        Route::get('profile', 'profile');
-        Route::patch('profile', 'updateProfile');
+        Route::get('reviews', 'listReviews');
     });
 });
