@@ -20,12 +20,12 @@ class BaseRepository implements BaseRepositoryInterface
                 $query->where($key, $value);
             }
         }
-        return $query->get();
+        return $query->get(); //return a collection
     }
 
     public function findBy($key, $value)
     {
-        return $this->model->where($key, $value)->first();
+        return $this->model->where($key, $value)->first(); // return one instance of model 
     }
 
     public function find($id)

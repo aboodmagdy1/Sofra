@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Client\UpdateProfileRequest;
 use App\Services\Client\ClientAuthService;
 
 use Illuminate\Http\Request;
+use function App\Helpers\responseJson;
 
 
 class AuthController extends Controller
@@ -21,15 +22,22 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $validated = $request->validated();
-        $result = $this->service->loginClient($validated);
-        return response()->json($result);
+        $result = $this->service->login($validated);
+
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
     }
 
     public function register(RegisterRequest $request)
     {
         $validated = $request->validated();
-        $result = $this->service->registerClient($validated);
-        return response()->json($result);
+        $result = $this->service->register($validated);
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
     }
 
     public function forgetPassword(Request $request)
@@ -38,7 +46,10 @@ class AuthController extends Controller
             'email' => 'required|email|exists:clients,email'
         ]);
         $result = $this->service->forgetPassword($request->all());
-        return response()->json($result);
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['message']);
+        }
+        return responseJson(0, $result['message']);
     }
 
 
@@ -46,17 +57,27 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         $result = $this->service->resetPassword($validated);
-        return response()->json($result);
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['message']);
+        }
+        return responseJson(0, $result['message']);
     }
 
     public function logout(Request $request)
     {
-        $result = $this->service->logout($request);
-        return response()->json($result);
+        $result = $this->service->logout();
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['message']);
+        }
+        return responseJson(0, $result['message']);
     }
     public function updateProfile(UpdateProfileRequest $request)
     {
-        $result = $this->service->updateProfile($request);
-        return response()->json($result);
+        $validated = $request->validated();
+        $result = $this->service->updateProfile($validated);
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['message']);
+        }
+        return responseJson(0, $result['message']);
     }
 }
