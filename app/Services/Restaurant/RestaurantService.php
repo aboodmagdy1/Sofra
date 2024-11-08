@@ -3,11 +3,15 @@
 namespace App\Services\Restaurant;
 
 use App\Repositories\Eloquent\RestaurantRepository;
+use App\Services\BaseAuthService;
 use function App\Helpers\serviceResponse;
 
-class RestaurantService
+class RestaurantService extends BaseAuthService
 {
-    public function __construct(private RestaurantRepository $repository) {}
+    public function __construct(private RestaurantRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     public function list($district_id, $name)
     {

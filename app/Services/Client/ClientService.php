@@ -4,11 +4,15 @@ namespace App\Services\Client;
 
 use App\Repositories\Eloquent\ClientRepository;
 
+use App\Services\BaseAuthService;
 use function App\Helpers\serviceResponse;
 
-class ClientService
+class ClientService extends BaseAuthService
 {
-    public function __construct(private ClientRepository $repository) {}
+    public function __construct(private ClientRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
 
     public function addReview($data)

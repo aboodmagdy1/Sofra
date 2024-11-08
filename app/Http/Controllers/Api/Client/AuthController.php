@@ -7,8 +7,7 @@ use App\Http\Requests\Api\Client\LoginRequest;
 use App\Http\Requests\Api\Client\RegisterRequest;
 use App\Http\Requests\Api\Client\ResetPasswordRequest;
 use App\Http\Requests\Api\Client\UpdateProfileRequest;
-use App\Services\Client\ClientAuthService;
-
+use App\Services\Client\ClientService;
 use Illuminate\Http\Request;
 use function App\Helpers\responseJson;
 
@@ -16,7 +15,7 @@ use function App\Helpers\responseJson;
 class AuthController extends Controller
 {
 
-    public function __construct(protected ClientAuthService $service) {}
+    public function __construct(protected ClientService $service) {}
 
 
     public function login(LoginRequest $request)
