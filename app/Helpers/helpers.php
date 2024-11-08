@@ -5,17 +5,6 @@ namespace App\Helpers;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
-if (!function_exists('serviceResponse')) {
-    function serviceResponse($status, $message, $data = null)
-    {
-        $response = [
-            'status' => $status,
-            'message' => $message,
-            'data' => $data
-        ];
-        return $response;
-    }
-}
 
 if (!function_exists('responseJson')) {
     function responseJson($status, $message, $data = null)

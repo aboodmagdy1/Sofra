@@ -5,7 +5,6 @@ namespace App\Services\Client;
 use App\Repositories\Eloquent\ClientRepository;
 
 use App\Services\BaseAuthService;
-use function App\Helpers\serviceResponse;
 
 class ClientService extends BaseAuthService
 {
@@ -19,8 +18,8 @@ class ClientService extends BaseAuthService
     {
         $review =  request()->user()->reviews()->create($data);
         if (!$review) {
-            return serviceResponse(0, 'error making review');
+            return ['status' => false, 'message' => 'Failed to add review'];
         }
-        return serviceResponse(1, 'success', $review);
+        return ['status' => true, "data" => $review];
     }
 }

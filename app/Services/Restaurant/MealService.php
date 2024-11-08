@@ -3,7 +3,6 @@
 namespace App\Services\Restaurant;
 
 use function App\Helpers\deleteImage;
-use function App\Helpers\serviceResponse;
 use function App\Helpers\uploadImage;
 use App\Models\Meal;
 use App\Repositories\Eloquent\MealRepository;
@@ -16,48 +15,54 @@ class MealService
     public function __construct(protected MealRepository $repository) {}
 
 
-    public function showMeals($restaurant_id)
+    public function show($restaurant_id)
     {
-        $meals = $this->repository->filter(['restaurant_id' => $restaurant_id]);
-        return serviceResponse(1, 'meals retrieved succefuly', ['meals' => $meals]);
+        $records = $this->repository->filter(['restaurant_id' => $restaurant_id]);
+        if ($records) {
+            return ['status' => true, "data" => $records];
+        }
+        return ['status' => false, "message" => "No records found"];
     }
 
-    public function createMeal($data, $restaurant_id)
+    public function create($data, $restaurant_id)
     {
         $data['restaurant_id'] = $restaurant_id;
 
         // upload image
         $data['image'] = uploadImage($data['image'], 'meals');
-        $meal = $this->repository->create($data);
-        return serviceResponse(1, 'meal created succefuly', ['meal' => $meal]);
+        $record = $this->repository->create($data);
+        if ($record) {
+            return ['status' => true, "data" => $record];
+        }
+        return ['status' => false, "message" => "Failed to create record"];
     }
 
-    public function updateMeal($data, $id)
+    public function update($data, $id)
     {
-        $meal = Meal::findOrFail($id);
-        if (!$meal) {
-            return serviceResponse(0, 'meal not found');
+        $record = Meal::find($id);
+        if (!$record) {
+            return ['status' => false, "message" => "No records found"];
         }
         if (isset($data['image'])) {
             $data['image'] = uploadImage($data['image'], 'meals');
-            deleteImage($meal->image); // delete old image
+            deleteImage($record->image); // delete old image
         }
 
-        tap($meal)->update($data);
-        return serviceResponse(1, 'meal updated succefuly', ['meal' => $meal]);
+        tap($record)->update($data);
+
+        return ['status' => true, "data" => $record];
     }
 
-    public function deleteMeal(string $id)
+    public function delete(string $id)
     {
-        $meal = Meal::findOrFail($id);
+        $record = Meal::find($id);
 
-        if (!$meal) {
-            return serviceResponse(0, 'meal not found');
+        if (!$record) {
+            return ['status' => false, "message" => "No record found"];
         }
 
-        deleteImage($meal->image); // delete image
-        $this->repository->delete($id);
-
-        return serviceResponse(1, 'meal deleted succefuly');
+        deleteImage($record->image); // delete image
+        $record->delete();
+        return ['status' => false, "message" => "Record deleted successfully"];
     }
 }

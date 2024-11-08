@@ -4,7 +4,6 @@ namespace App\Services\Restaurant;
 
 use App\Repositories\Eloquent\RestaurantRepository;
 use App\Services\BaseAuthService;
-use function App\Helpers\serviceResponse;
 
 class RestaurantService extends BaseAuthService
 {
@@ -15,32 +14,33 @@ class RestaurantService extends BaseAuthService
 
     public function list($district_id, $name)
     {
-        $restaurants =  $this->repository->filter(['district_id' => $district_id, 'name' => $name]);
-        if (count($restaurants) > 0) {
-            return serviceResponse(1, 'succes', $restaurants);
+        $records =  $this->repository->filter(['district_id' => $district_id, 'name' => $name]);
+        if ($records) {
+            return ['status' => true, 'data' => $records];
         }
-        return serviceResponse(0, 'no data found', []);
+        return ['status' => false, 'message' => 'No records found'];
     }
 
     public function show($restaurant_id)
     {
-        $restaurant = $this->repository->find($restaurant_id);
-        if ($restaurant) {
-            $restaurant->meals = $restaurant->meals()->paginate(10);
-            $restaurant->reviews = $restaurant->reviews()->paginate(5);
-            return serviceResponse(1, 'success', $restaurant);
+        $record = $this->repository->find($restaurant_id);
+        if ($record) {
+            $record->meals = $record->meals()->paginate(10);
+            $record->reviews = $record->reviews()->paginate(5);
+
+            return ['status' => true, 'data' => $record];
         }
-        return serviceResponse(0, 'no data found', []);
+        return ['status' => false, 'message' => 'No records found'];
     }
 
 
     public function reviews()
     {
         $restaurant = $this->repository->find(request()->user()->id);
-        $reviews = $restaurant->reviews()->paginate(5);
-        if ($reviews) {
-            return serviceResponse(1, 'success', $reviews);
+        $records = $restaurant->reviews()->paginate(5);
+        if ($records) {
+            return ['status' => true, 'data' => $records];
         }
-        return serviceResponse(0, 'no data found', []);
+        return ['status' => false, 'message' => 'No records found'];
     }
 }

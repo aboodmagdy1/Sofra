@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Restaurant;
 
 use App\Services\Restaurant\RestaurantService;
+use function App\Helpers\responseJson;
 
 class RestaurantController
 {
@@ -10,6 +11,9 @@ class RestaurantController
     public function listReviews()
     {
         $result = $this->service->reviews();
-        return response()->json($result);
+        if ($result['status']) {
+            return responseJson(1, 'Reviews retrieved successfully', $result['data']);
+        }
+        return responseJson(0, $result['message']);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Client\CreateReviewRequest;
 use App\Services\Client\ClientService;
 use Illuminate\Http\Request;
+use function App\Helpers\responseJson;
 
 class MainClientController extends Controller
 {
@@ -16,6 +17,10 @@ class MainClientController extends Controller
     {
         $data = $request->validated();
         $result =  $this->service->addReview($data);
-        return response()->json($result);
+        if ($result['status']) {
+            return responseJson(1, 'Review added successfully', $result['data']);
+        }
+
+        return responseJson(0, $result['message']);
     }
 }
