@@ -10,6 +10,4 @@ class RestaurantRepository extends BaseRepository
     {
         parent::__construct($model);
     }
-
-    public function filterBy() {}
 }

@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->controller(AuthController::class)->group(func
 
 
 Route::middleware('auth:sanctum')->controller(MainClientController::class)->group(function () {
-    Route::post('/restaurant/add-review', 'addReview');
+    Route::post('/add-review', 'addReview');
+    Route::post('/new-order', 'createOrder');
 });
