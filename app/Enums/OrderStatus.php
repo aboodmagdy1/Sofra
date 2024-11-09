@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum OrderStatus: int
 {
-    case Pending = 0;
-    case Accepted = 1;
-    case Rejected = 2;
-    case Delivered = 3;
-    case Canceled = 4;
+    case PENDING = 1;
+    case ACCEPTED = 2;
+    case REJECTED = 3;
+    case DELIVERED = 4;
+    case CANCELED = 5;
 }

@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Repositories\Eloquent\ClientRepository;
 use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
+use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
 use App\Services\Client\ClientService;
+use App\Services\OrderService;
 use App\Services\Restaurant\MealService;
 use App\Services\Restaurant\OfferService;
 use App\Services\Restaurant\RestaurantService;
@@ -41,6 +43,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(ClientService::class, function ($app) {
             return new ClientService($app->make(ClientRepository::class));
+        });
+        $this->app->bind(OrderService::class, function ($app) {
+            return new OrderService($app->make(OrderRepository::class));
         });
     }
 
