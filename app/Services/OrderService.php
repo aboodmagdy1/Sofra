@@ -98,11 +98,36 @@ class OrderService
 
     public function show(string $id)
     {
-        $record = Order::where('id', $id)->where('client_id', request()->user()->id)->first();
+        $record = Order::where('id', $id)->first();
         if ($record) {
             return ['status' => true, 'data' => $record];
         }
 
         return ['status' => false];
+    }
+
+    public function restNewOrders()
+    {
+        $orders =   Order::ofStatus([OrderStatus::PENDING->value])
+            ->where('restaurant_id', request()->user()->id)
+            ->get();
+
+        return ['status' => true, 'data' => $orders];
+    }
+    public function restCurrentOrders()
+    {
+        $orders =   Order::ofStatus([OrderStatus::ACCEPTED->value])
+            ->where('restaurant_id', request()->user()->id)
+            ->get();
+
+        return ['status' => true, 'data' => $orders];
+    }
+    public function restPreviousOrders()
+    {
+        $orders =   Order::ofStatus([OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value])
+            ->where('restaurant_id', request()->user()->id)
+            ->get();
+
+        return ['status' => true, 'data' => $orders];
     }
 }

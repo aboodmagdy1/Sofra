@@ -51,4 +51,31 @@ class OrderController extends Controller
         }
         return responseJson(0, 'no order with this id  ');
     }
+
+    public function currentOrders()
+    {
+        $result = $this->service->restCurrentOrders();
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
+    }
+
+    public function newOrders()
+    {
+        $result = $this->service->restNewOrders();
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
+    }
+
+    public function prevOrders()
+    {
+        $result = $this->service->restPreviousOrders();
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
+    }
 }
