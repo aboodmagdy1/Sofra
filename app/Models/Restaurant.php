@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -10,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Restaurant extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, Notifiable;
     protected $table = 'restaurants';
     public $timestamps = true;
     protected $fillable = array('status', 'name', 'phone', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'contact_num', 'watts_num', 'image', 'password', 'reset_code', 'email');
@@ -60,5 +61,20 @@ class Restaurant extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    public function routeNotificationForFcm()
+    {
+        return $this->getFcmToken();
+    }
+
+    public function getFcmToken()
+    {
+        return  \Laravel\Sanctum\PersonalAccessToken::where('name', 'mobile')
+            ->where('tokenable_type', '=', Restaurant::class)
+            ->where('tokenable_id', '=', $this->id)
+            ->pluck('token')
+            ->first();
     }
 }
