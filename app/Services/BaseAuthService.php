@@ -41,6 +41,11 @@ class BaseAuthService
         }
         $newRecord->createToken('mobile');
         $api_token = $newRecord->createToken('api')->plainTextToken;
+
+        // for restaurant category
+        if (isset($data['category_ids'])) {
+            $newRecord->categories()->attach($data['category_ids']);
+        }
         return  ["data" => ["record" => $newRecord,  "api_token" => $api_token], 'status' => true];
     }
 

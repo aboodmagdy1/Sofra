@@ -14,10 +14,10 @@ class CreateClientsTable extends Migration
 			$table->string('name');
 			$table->string('email');
 			$table->string('phone');
-			$table->string('image');
+			$table->string('image')->nullable();
 			$table->integer('district_id')->unsigned();
 			$table->string('password');
-			$table->string('reset_code');
+			$table->string('reset_code')->nullable();
 		});
 	}
 

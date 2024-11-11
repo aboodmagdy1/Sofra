@@ -21,7 +21,7 @@ class CreateRestaurantsTable extends Migration
 			$table->string('password');
 			$table->decimal('delivery_price');
 			$table->decimal('avg_rate')->nullable();
-			$table->string('image');
+			$table->string('image')->nullable();
 			$table->string('reset_code')->nullable();
 			$table->integer('district_id')->unsigned();
 		});

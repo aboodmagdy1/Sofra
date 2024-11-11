@@ -11,11 +11,11 @@ class CreateOrdersTable extends Migration
 		Schema::create('orders', function (Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->decimal('cost'); //سعر الطلب بدون العمولة
-			$table->decimal('commission_price'); //العمولة
-			$table->decimal('delivery_price'); // سعر التوصيل
-			$table->decimal('total_price'); // السعر الكلي
-			$table->decimal('net');
+			$table->decimal('cost')->nullable(); //سعر الطلب بدون العمولة
+			$table->decimal('commission_price')->nullable(); //العمولة
+			$table->decimal('delivery_price')->nullable(); // سعر التوصيل
+			$table->decimal('total_price')->nullable(); // السعر الكلي
+			$table->decimal('net')->nullable();
 			$table->integer('payment_method_id')->unsigned();
 			$table->text('note');
 			$table->text('address');
