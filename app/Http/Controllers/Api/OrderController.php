@@ -25,7 +25,7 @@ class OrderController extends Controller
         return responseJson(0, $result['message']);
     }
 
-    public function myCurrentOrders()
+    public function clientCurrentOrders()
     {
         $result = $this->service->currentClientOrders();
         if ($result['status']) {
@@ -34,7 +34,7 @@ class OrderController extends Controller
         return responseJson(0, $result['message']);
     }
 
-    public function myPreviousOrders()
+    public function clientPreviousOrders()
     {
         $result = $this->service->previousClientOrders();
         if ($result['status']) {
@@ -52,7 +52,7 @@ class OrderController extends Controller
         return responseJson(0, 'no order with this id  ');
     }
 
-    public function currentOrders()
+    public function restCurrentOrders()
     {
         $result = $this->service->restCurrentOrders();
         if ($result['status']) {
@@ -61,7 +61,7 @@ class OrderController extends Controller
         return responseJson(0, $result['message']);
     }
 
-    public function newOrders()
+    public function restNewOrders()
     {
         $result = $this->service->restNewOrders();
         if ($result['status']) {
@@ -70,7 +70,7 @@ class OrderController extends Controller
         return responseJson(0, $result['message']);
     }
 
-    public function prevOrders()
+    public function restPrevOrders()
     {
         $result = $this->service->restPreviousOrders();
         if ($result['status']) {

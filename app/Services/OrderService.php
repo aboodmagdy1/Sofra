@@ -86,13 +86,13 @@ class OrderService
 
     public function currentClientOrders(): array
     {
-        $records = request()->user()->orders()->whereIn("status", [OrderStatus::ACCEPTED, OrderStatus::PENDING])->get();
+        $records = Order::ofStatus([OrderStatus::PENDING->value, OrderStatus::ACCEPTED->value])->where('client_id', request()->user()->id)->get();
         return ['status' => true, 'data' => $records];
     }
 
     public function previousClientOrders()
     {
-        $records = request()->user()->orders()->whereIn("status", [OrderStatus::DELIVERED, OrderStatus::CANCELED, OrderStatus::REJECTED])->get();
+        $records = Order::ofStatus([OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value])->where('client_id', request()->user()->id)->get();
         return ['status' => true, 'data' => $records];
     }
 

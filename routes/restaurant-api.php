@@ -32,8 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::controller(OrderController::class)->group(function () {
-        Route::get('current-orders', 'currentOrders');
-        Route::get('new-orders', 'newOrders');
-        Route::get('previous-orders', 'prevOrders');
+        Route::get('current-orders', 'restCurrentOrders');
+        Route::get('new-orders', 'restNewOrders');
+        Route::get('previous-orders', 'restPrevOrders');
     });
 });
