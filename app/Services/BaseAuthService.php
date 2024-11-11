@@ -18,7 +18,7 @@ class BaseAuthService
         $record = $this->repository->filter(['email' => $credentials['email']])->first();
         if ($record && Hash::check($credentials['password'], $record->password)) {
             //device token
-            $record->tokens()->where('name', 'mobile')->delete();
+            $record->tokens()->delete();
             $record->createToken('mobile');
 
             $api_token = $record->createToken('api')->plainTextToken; // api token
