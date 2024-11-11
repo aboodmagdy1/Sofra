@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\District;
 use App\Models\PaymentMethod;
 use App\Models\Restaurant;
+use App\Models\Setting;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -46,7 +47,9 @@ class DatabaseSeeder extends Seeder
             'min_order_price' => 20,
             'delivery_price' => 5,
             'status' => 1,
-            'password' => bcrypt('rest'),
+            'password' => Hash::make('rest'),
         ]);
+
+        Setting::create(['about' => 'test about', 'commission' => 10]);
     }
 }
