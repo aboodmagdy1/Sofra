@@ -13,4 +13,6 @@ Route::controller(GeneralController::class)->group(function () {
     Route::get('/categories', 'restaurant_categories');
     Route::get('/restaurants', 'list_restaurants');
     Route::get('/restaurants/{id}', 'show_restaurant');
+    Route::get('/settings', 'settings');
+    Route::post('/contact', 'contact');
 });

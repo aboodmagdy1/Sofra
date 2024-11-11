@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Contact;
 use App\Models\District;
 use App\Models\Offer;
+use App\Models\Setting;
 use App\Services\Restaurant\RestaurantService;
 use Illuminate\Http\Request;
 use function App\Helpers\responseJson;
@@ -54,5 +56,26 @@ class GeneralController extends Controller
     {
         $response = $this->service->show($id);
         return responseJson($response['status'], $response['message'], $response['data']);
+    }
+
+    public function settings()
+    {
+        $record = Setting::first();
+        return responseJson(1, 'success', $record);
+    }
+
+    public function contact()
+    {
+        request()->validate((
+            [
+                'full_name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'message' => 'required',
+                'type' => 'required|in:complaint,suggestion,inquiry'
+            ]
+        ));
+        $record = Contact::create(request()->all());
+        return responseJson(1, 'success', $record);
     }
 }
