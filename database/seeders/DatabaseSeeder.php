@@ -6,10 +6,12 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Client;
 use App\Models\District;
+use App\Models\PaymentMethod;
 use App\Models\Restaurant;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,10 +28,12 @@ class DatabaseSeeder extends Seeder
         Client::create([
             'phone' => '01000000000',
             'name' => 'client-1',
-            'email' => 'clent-1@gmail.com',
-            'password' => bcrypt('client'),
+            'email' => 'client-1@gmail.com',
+            'password' => Hash::make('client'),
             'district_id' => 1,
         ]);
+
+        PaymentMethod::create(['name' => 'cash']);
 
         Category::create(['name' => 'وجبات سريعه']);
         Restaurant::create([
