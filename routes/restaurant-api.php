@@ -36,5 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('new-orders', 'restNewOrders');
         Route::get('previous-orders', 'restPrevOrders');
         Route::get('/orders-commission', 'commission');
+        Route::patch('/accept-order/{order}', 'acceptOrder');
+        Route::patch('/reject-order/{order}', 'rejectOrder');
+        Route::patch('/deliverd-order/{order}', 'confirmDeliverdOrder'); // لو مثلا الاوردر وصل والعميل استلم بس متكاش عاي استلام 
     });
 });

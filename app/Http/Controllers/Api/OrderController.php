@@ -15,6 +15,7 @@ class OrderController extends Controller
     public function __construct(private OrderService $service) {}
 
 
+    // --------------------------------------------------Client --------------------------------------------------
     public function createOrder(CreateOrderRequest $request)
     {
         $data = $request->validated();
@@ -52,6 +53,25 @@ class OrderController extends Controller
         return responseJson(0, 'no order with this id  ');
     }
 
+
+    public function cancelOrder(string $id)
+    {
+        $result = $this->service->cancel($id);
+        if ($result['status']) {
+            return responseJson(1, $result['message']);
+        }
+        return responseJson(0, $result['message']);
+    }
+    public function receiveOrder(string $id)
+    {
+        $result = $this->service->receive($id);
+        if ($result['status']) {
+            return responseJson(1, $result['message']);
+        }
+        return responseJson(0, $result['message']);
+    }
+    //    --------------------------------------------------Restaurant --------------------------------------------------
+
     public function restCurrentOrders()
     {
         $result = $this->service->restCurrentOrders();
@@ -88,22 +108,6 @@ class OrderController extends Controller
         return responseJson(0, $result['message']);
     }
 
-    public function cancelOrder(string $id)
-    {
-        $result = $this->service->cancel($id);
-        if ($result['status']) {
-            return responseJson(1, $result['message']);
-        }
-        return responseJson(0, $result['message']);
-    }
-    public function receiveOrder(string $id)
-    {
-        $result = $this->service->receive($id);
-        if ($result['status']) {
-            return responseJson(1, $result['message']);
-        }
-        return responseJson(0, $result['message']);
-    }
     public function acceptOrder(string $id)
     {
         $result = $this->service->accept($id);
@@ -115,6 +119,14 @@ class OrderController extends Controller
     public function rejectOrder(string $id)
     {
         $result = $this->service->reject($id);
+        if ($result['status']) {
+            return responseJson(1, $result['message']);
+        }
+        return responseJson(0, $result['message']);
+    }
+    public function confirmDeliverdOrder(string $id)
+    {
+        $result = $this->service->receive($id);
         if ($result['status']) {
             return responseJson(1, $result['message']);
         }
