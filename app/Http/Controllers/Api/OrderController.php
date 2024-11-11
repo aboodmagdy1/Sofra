@@ -78,4 +78,13 @@ class OrderController extends Controller
         }
         return responseJson(0, $result['message']);
     }
+
+    public function commission()
+    {
+        $result = $this->service->calculateCommission();
+        if ($result['status']) {
+            return responseJson(1, 'success', $result['data']);
+        }
+        return responseJson(0, $result['message']);
+    }
 }

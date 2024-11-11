@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\OrderStatus;
 use App\Enums\RestaurantStatus;
+use App\Models\Commision;
 use App\Models\Meal;
 use App\Models\Order;
 use App\Models\Restaurant;
@@ -129,5 +130,21 @@ class OrderService
             ->get();
 
         return ['status' => true, 'data' => $orders];
+    }
+    public function  calculateCommission()
+    {
+        // get the total price of the orders
+        $orders = request()->user()->orders()->where('status', OrderStatus::DELIVERED->value)->get();
+        $total = $orders->sum('total_price');
+        $net = $orders->sum('net');
+        $app_commission = $orders->sum('commission_price');
+        $rest_payed_commission = Commision::where('restaurant_id', request()->user()->id)->sum('amount');
+        return ['status' => true, 'data' => [
+            'مبيعات المطعم' => $total,
+            'الصافي' => $net,
+            'العمولة' => $app_commission,
+            'العمولة المدفوعة' => +$rest_payed_commission,
+            'العمولة المستحقة' => $app_commission - $rest_payed_commission,
+        ]];
     }
 }

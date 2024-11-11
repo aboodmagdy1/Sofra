@@ -35,5 +35,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('current-orders', 'restCurrentOrders');
         Route::get('new-orders', 'restNewOrders');
         Route::get('previous-orders', 'restPrevOrders');
+        Route::get('/orders-commission', 'commission');
     });
 });
