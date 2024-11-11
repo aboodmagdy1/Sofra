@@ -27,5 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/orders-current', 'clientCurrentOrders');
         Route::get('/orders-previous', 'clientPreviousOrders');
         Route::get('/orders/{order}', 'showOrder');
+        Route::patch('/receive-order/{id}', 'receiveOrder');
+        Route::patch('/cancel-order/{id}', 'cancelOrder');
     });
 });

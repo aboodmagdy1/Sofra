@@ -147,4 +147,41 @@ class OrderService
             'العمولة المستحقة' => $app_commission - $rest_payed_commission,
         ]];
     }
+
+    public function cancel($id)
+    {
+        $order = $this->repository->filter(['client_id' => request()->user()->id])->find($id);
+        if ($order) {
+            $order->update(['status' => OrderStatus::CANCELED->value]);
+            return ['status' => true, 'message' => 'Order canceled successfully'];
+        }
+        return ['status' => false, 'message' => 'Order not found'];
+    }
+    public function reject($id)
+    {
+        $order = $this->repository->find($id);
+        if ($order) {
+            $order->update(['status' => OrderStatus::REJECTED->value]);
+            return ['status' => true, 'message' => 'Order rejected successfully'];
+        }
+        return ['status' => false, 'message' => 'Order not found'];
+    }
+    public function receive($id)
+    {
+        $order = $this->repository->find($id);
+        if ($order) {
+            $order->update(['status' => OrderStatus::DELIVERED->value]);
+            return ['status' => true, 'message' => 'Order deliverd successfully'];
+        }
+        return ['status' => false, 'message' => 'Order not found'];
+    }
+    public function accept($id)
+    {
+        $order = $this->repository->find($id);
+        if ($order) {
+            $order->update(['status' => OrderStatus::ACCEPTED->value]);
+            return ['status' => true, 'message' => 'Order accepted successfully'];
+        }
+        return ['status' => false, 'message' => 'Order not found'];
+    }
 }
