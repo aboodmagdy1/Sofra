@@ -9,15 +9,15 @@ class Notification extends Model
 
     protected $table = 'notifications';
     public $timestamps = true;
-    protected $fillable = array('title', 'body', 'is_read', 'notifyiable');
+    protected $fillable = array('title', 'body', 'is_read', 'notifyable');
 
     public function clients()
     {
-        return $this->morphedByMany('App\Models\Client', 'notifiable');
+        return $this->morphedByMany('App\Models\Client', 'notifyable');
     }
 
     public function restaurants()
     {
-        return $this->morphedByMany('App\Models\Restaurant', 'notifiable');
+        return $this->morphedByMany('App\Models\Restaurant', 'notifyable');
     }
 }
