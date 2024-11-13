@@ -3,12 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateReviewsTable extends Migration
-{
+class CreateReviewsTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('reviews', function (Blueprint $table) {
+		Schema::create('reviews', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
 			$table->text('content');
