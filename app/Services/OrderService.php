@@ -8,6 +8,7 @@ use App\Models\Commision;
 use App\Models\Meal;
 use App\Models\Order;
 use App\Models\Restaurant;
+use App\Notifications\OrderNotification;
 use App\Repositories\Eloquent\OrderRepository;
 use function App\Helpers\settings;
 
@@ -78,8 +79,13 @@ class OrderService
 
 
         // 8) send notification to the restaurant
-        //TODO: send notification to the restaurant
-
+        // 8.1) Create notification
+        $notification =  $restaurant->notifications()->create([
+            'title' => 'New Pending Order',
+            'body' => 'You have a new order from ' . request()->user()->name,
+        ]);
+        //TODO:Send notification to the restaurant 
+        // $restaurant->notify(new OrderNotification($notification->title, $notification->body));
 
         //  9) return success response
         return ['status' => true, 'data' => $order];
