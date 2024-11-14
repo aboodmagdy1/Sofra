@@ -75,7 +75,7 @@ class CreateForeignKeys extends Migration
 				->onUpdate('no action');
 		});
 		Schema::table('commission', function (Blueprint $table) {
-			$table->foreign('resturant_id')->references('id')->on('restaurants')
+			$table->foreign('restaurant_id')->references('id')->on('restaurants')
 				->onDelete('no action')
 				->onUpdate('no action');
 		});
@@ -123,7 +123,7 @@ class CreateForeignKeys extends Migration
 			$table->dropForeign('category_restaurant_restaurant_id_foreign');
 		});
 		Schema::table('commission', function (Blueprint $table) {
-			$table->dropForeign('commission_resturant_id_foreign');
+			$table->dropForeign('commission_restaurant_id_foreign');
 		});
 	}
 }

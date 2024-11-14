@@ -9,9 +9,9 @@ class Commision extends Model
 
     protected $table = 'commission';
     public $timestamps = true;
-    protected $fillable = array('resturant_id', 'amount', 'details');
+    protected $fillable = array('restaurant_id', 'amount', 'details');
 
-    public function resturant()
+    public function restaurant()
     {
         return $this->belongsTo('App\Models\Restaurant');
     }
