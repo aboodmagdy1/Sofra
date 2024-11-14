@@ -93,19 +93,25 @@ class OrderService
 
     public function currentClientOrders(): array
     {
-        $records = Order::ofStatus([OrderStatus::PENDING->value, OrderStatus::ACCEPTED->value])->where('client_id', request()->user()->id)->get();
+        $records = $this->repository->findByClientAndStatus(
+            request()->user()->id,
+            [OrderStatus::PENDING->value]
+        );
         return ['status' => true, 'data' => $records];
     }
 
     public function previousClientOrders()
     {
-        $records = Order::ofStatus([OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value])->where('client_id', request()->user()->id)->get();
+        $records = $this->repository->findByClientAndStatus(
+            request()->user()->id,
+            [OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value]
+        );
         return ['status' => true, 'data' => $records];
     }
 
     public function show(string $id)
     {
-        $record = Order::where('id', $id)->first();
+        $record = $this->repository->filter(['client_id' => request()->user()->id, 'id' => $id])->first();
         if ($record) {
             return ['status' => true, 'data' => $record];
         }
@@ -115,32 +121,37 @@ class OrderService
 
     public function restNewOrders()
     {
-        $orders =   Order::ofStatus([OrderStatus::PENDING->value])
-            ->where('restaurant_id', request()->user()->id)
-            ->get();
-
+        $orders =   $this->repository->findByRestaurantAndStatus(
+            request()->user()->id,
+            [OrderStatus::PENDING->value]
+        );
         return ['status' => true, 'data' => $orders];
     }
     public function restCurrentOrders()
     {
-        $orders =   Order::ofStatus([OrderStatus::ACCEPTED->value])
-            ->where('restaurant_id', request()->user()->id)
-            ->get();
+        $orders = $this->repository->findByRestaurantAndStatus(
+            request()->user()->id,
+            [OrderStatus::ACCEPTED->value]
+        );
 
         return ['status' => true, 'data' => $orders];
     }
     public function restPreviousOrders()
     {
-        $orders =   Order::ofStatus([OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value])
-            ->where('restaurant_id', request()->user()->id)
-            ->get();
+        $orders =  $this->repository->findByRestaurantAndStatus(
+            request()->user()->id,
+            [OrderStatus::DELIVERED->value, OrderStatus::REJECTED->value, OrderStatus::CANCELED->value]
+        );
 
         return ['status' => true, 'data' => $orders];
     }
     public function  calculateCommission()
     {
         // get the total price of the orders
-        $orders = request()->user()->orders()->where('status', OrderStatus::DELIVERED->value)->get();
+        $orders = $this->repository->findByRestaurantAndStatus(
+            request()->user()->id,
+            [OrderStatus::DELIVERED->value]
+        );
         $total = $orders->sum('total_price');
         $net = $orders->sum('net');
         $app_commission = $orders->sum('commission_price');
@@ -156,38 +167,58 @@ class OrderService
 
     public function cancel($id)
     {
-        $order = $this->repository->filter(['client_id' => request()->user()->id])->find($id);
+        $order = $this->repository->filter(['client_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
-            $order->update(['status' => OrderStatus::CANCELED->value]);
-            return ['status' => true, 'message' => 'Order canceled successfully'];
+            // check if the order is pending
+            if ($order->status == OrderStatus::PENDING->value || $order->status == OrderStatus::ACCEPTED->value) {
+                $this->repository->update($order->id, ['status' => OrderStatus::CANCELED->value]);
+                return ['status' => true, 'message' => 'Order canceled successfully'];
+            }
+            return ['status' => false, 'message' => 'order must be pending or accepted to cancel it'];
+
+            // update the order status to canceled
         }
-        return ['status' => false, 'message' => 'Order not found'];
+        return ['status' => false, 'message' => 'Order not found Or not belong to you'];
     }
     public function reject($id)
     {
-        $order = $this->repository->find($id);
+        $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
-            $order->update(['status' => OrderStatus::REJECTED->value]);
-            return ['status' => true, 'message' => 'Order rejected successfully'];
+            // check if the order is pending
+            if ($order->status == OrderStatus::PENDING->value) {
+                $this->repository->update($order->id, ['status' => OrderStatus::REJECTED->value]);
+                return ['status' => true, 'message' => 'Order rejected successfully'];
+            }
+            return ['status' => false, 'message' => 'Order must be pending to reject it'];
         }
-        return ['status' => false, 'message' => 'Order not found'];
+        return ['status' => false, 'message' => 'Order not found Or not belong to you'];
     }
-    public function receive($id)
+    public function confirm($id)
     {
-        $order = $this->repository->find($id);
+        $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
-            $order->update(['status' => OrderStatus::DELIVERED->value]);
-            return ['status' => true, 'message' => 'Order deliverd successfully'];
+            // check if the order is pending
+            if ($order->status == OrderStatus::ACCEPTED->value) {
+                $this->repository->update($order->id, ['status' => OrderStatus::DELIVERED->value]);
+                return ['status' => true, 'message' => 'Order deliverd successfully'];
+            }
+            return ['status' => false, 'message' => 'You can not confirmed  this order before  accept  it '];
         }
-        return ['status' => false, 'message' => 'Order not found'];
+        return ['status' => false, 'message' => 'Order not found Or not belong to you'];
     }
     public function accept($id)
     {
-        $order = $this->repository->find($id);
+        $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
-            $order->update(['status' => OrderStatus::ACCEPTED->value]);
-            return ['status' => true, 'message' => 'Order accepted successfully'];
+            // check if the order is pending
+            if ($order->status == OrderStatus::PENDING->value) {
+
+                $this->repository->update($order->id, ['status' => OrderStatus::ACCEPTED->value]);
+                return ['status' => true, 'message' => 'Order accepted successfully'];
+            }
+
+            return ['status' => false, 'message' => 'Order Is not pending to accept it'];
         }
-        return ['status' => false, 'message' => 'Order not found'];
+        return ['status' => false, 'message' => 'Order not found Or not belong to you'];
     }
 }

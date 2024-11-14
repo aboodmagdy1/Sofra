@@ -62,9 +62,9 @@ class OrderController extends Controller
         }
         return responseJson(0, $result['message']);
     }
-    public function receiveOrder(string $id)
+    public function confirmOrder(string $id)
     {
-        $result = $this->service->receive($id);
+        $result = $this->service->confirm($id);
         if ($result['status']) {
             return responseJson(1, $result['message']);
         }
@@ -126,7 +126,7 @@ class OrderController extends Controller
     }
     public function confirmDeliverdOrder(string $id)
     {
-        $result = $this->service->receive($id);
+        $result = $this->service->confirm($id);
         if ($result['status']) {
             return responseJson(1, $result['message']);
         }
