@@ -22,7 +22,7 @@ class OrderService
         //1) get the restaurant status
         $restaurant = Restaurant::find($data['restaurant_id']);
         //2) check if the restaurant is closed
-        if ($restaurant->status == RestaurantStatus::Closed->value) {
+        if ($restaurant->status === RestaurantStatus::Closed->value) {
             return ['status' => false, 'message' => 'Sorry, this restaurant is closed now'];
         }
 
@@ -170,7 +170,7 @@ class OrderService
         $order = $this->repository->filter(['client_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
             // check if the order is pending
-            if ($order->status == OrderStatus::PENDING->value || $order->status == OrderStatus::ACCEPTED->value) {
+            if ($order->status === OrderStatus::PENDING->value || $order->status === OrderStatus::ACCEPTED->value) {
                 $this->repository->update($order->id, ['status' => OrderStatus::CANCELED->value]);
                 return ['status' => true, 'message' => 'Order canceled successfully'];
             }
@@ -185,7 +185,7 @@ class OrderService
         $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
             // check if the order is pending
-            if ($order->status == OrderStatus::PENDING->value) {
+            if ($order->status === OrderStatus::PENDING->value) {
                 $this->repository->update($order->id, ['status' => OrderStatus::REJECTED->value]);
                 return ['status' => true, 'message' => 'Order rejected successfully'];
             }
@@ -198,7 +198,7 @@ class OrderService
         $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
             // check if the order is pending
-            if ($order->status == OrderStatus::ACCEPTED->value) {
+            if ($order->status === OrderStatus::ACCEPTED->value) {
                 $this->repository->update($order->id, ['status' => OrderStatus::DELIVERED->value]);
                 return ['status' => true, 'message' => 'Order deliverd successfully'];
             }
@@ -211,7 +211,7 @@ class OrderService
         $order = $this->repository->filter(['restaurant_id' => request()->user()->id, 'id' => $id])->first();
         if ($order) {
             // check if the order is pending
-            if ($order->status == OrderStatus::PENDING->value) {
+            if ($order->status === OrderStatus::PENDING->value) {
 
                 $this->repository->update($order->id, ['status' => OrderStatus::ACCEPTED->value]);
                 return ['status' => true, 'message' => 'Order accepted successfully'];
