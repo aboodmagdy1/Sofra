@@ -4,12 +4,12 @@
 
 ## About Sofra
 
-Sofra is a mobile application for multi restarurants and there customers   built using PHP , Laravel , MySql  by Repo Design pattern  .
+Sofra is a mobile application for multi restarurants and there customers   and this is the backend part .
 So Customer can make orders , track order status , reviw restaurants , search for restaurnats ....
 Restaurant Can manage it's orders , Commissions , Meals to sell ....
 
-It consist of : 
-- Comprihansive API for Mobile application .
+This project  consist of : 
+- Comprihansive API for Mobile application built using PHP , Laravel , MySql  , Eloquent ORM . 
 - Admin Dashboard .
 
 ## Features 
@@ -29,27 +29,47 @@ It consist of :
 - Comprihansive Dashboard 
 
 
+## Prerequisites: 
+- [Laravel](https://laravel.com/docs/11.x) v11
+- [PHP](https://www.php.net/docs.php) v8.2^
+
+
+
 ## Installation 
+- clone the project :
  ```
-1) clone the project
    git clone https://github.com/aboodmagdy1/Sofra.git
    cd Sofra
-
-2) install Dependencies
-    composer install
-
-3) set  the .env file ( copy from example) 
-    cp .env.example .env 
-
-Then for Usage  :
-4) set your DB configratio
-
  ```
+- Serve project : 
+  - Laravel  Herd : open as site then visit sofra.text
+  - or put project of main dir of XAMPP then visit localhost/
 
-## Built With : 
+- install Dependencies :
+``` 
+composer install
+```
+
+- set  the .env file ( copy from example)
+ ```
+  copy env.example into .env file 
+ ```
+Then for Usage  :
+- set your DB configration
+
+- Built DB tables
+```
+php artisan migrate
+```
+
+
+
+## Techonolgy Used: 
 - [Laravel](https://laravel.com/docs/11.x) v11
 - [PHP](https://www.php.net/docs.php) v8.2
 - [Spatie](https://spatie.be/docs/laravel-permission/v6/introduction) v6
 - [laravel-notification-channels](https://github.com/laravel-notification-channels/fcm)
-- MySql 
+- MySql
+- Eloquent ORM
+- Mailtrap for Mails 
 
