@@ -14,11 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
             Route::prefix('api/client')->group(base_path('routes/client-api.php'));
             Route::prefix('api/restaurant')->group(base_path('routes/restaurant-api.php'));
-            // Route::prefix('/admin')->as('admin.')->group(base_path('routes/admin.php'));
+            Route::prefix('/admin/dashboard')->as('admin.')->middleware('web')->group(base_path('routes/admin.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectGuestsTo('admin/dashboard/login');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
