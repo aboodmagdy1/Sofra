@@ -4,9 +4,9 @@
 @stop
 
 {{-- browsr title --}}
-@section('title','X | Edit')
+@section('title','City | Create')
 {{-- Page Content  title --}}
-@section('page-header',' Edit X Page')
+@section('page-header',' Create City Page')
 
 @section('content')
 
@@ -24,7 +24,9 @@
                   
                 </h3>
               </div>
-              {{html()->form('PUT')->route('')->open()}}
+              <!-- /.card-header -->
+              <!-- form start -->
+              {{html()->form('POST')->route('admin.cities.store')->open()}}
               <div class="card-body">
                 <div class="form-group">
                   {{html()->label('Name')->for('name')}}
@@ -33,14 +35,13 @@
                   <span class="text-danger">{{$message}}</span>
                 @enderror
                 </div>
-                
             </div>
             <div class="card-footer">
-              {{html()->button('Update')->class('btn btn-primary')->type('submit')}}
-
-              {{html()->form()->close()}}
-
+              {{html()->button('Submit')->class('btn btn-primary')->type('submit')}}
             </div>
+            {{html()->form()->close()}}
+            </div>
+            
             <!-- /.card -->
           </div>
           <!--/.col (left) -->

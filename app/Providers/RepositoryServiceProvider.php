@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\ClientRepository;
 use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
@@ -9,6 +10,7 @@ use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Services\Admin\AdminAuthService;
+use App\Services\CityService;
 use App\Services\Client\ClientService;
 use App\Services\OrderService;
 use App\Services\Restaurant\MealService;
@@ -52,6 +54,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(AdminAuthService::class, function ($app) {
             return new AdminAuthService($app->make(UserRepository::class));
+        });
+
+        $this->app->bind(CityService::class, function ($app) {
+            return new CityService($app->make(CityRepository::class));
         });
     }
 

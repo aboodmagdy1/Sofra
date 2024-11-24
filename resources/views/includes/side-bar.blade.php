@@ -21,15 +21,15 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{route('admin.cities.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-map"></i>
               <p>
-                Index Page
+                Cities 
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{route('admin.cities.index')}}" class="nav-link">
               <i class="nav-icon fas fa-lock"></i>
               <p>
                 {{__('Roles')}}

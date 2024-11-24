@@ -4,9 +4,9 @@
 @stop
 
 {{-- browsr title --}}
-@section('title','X | Edit')
+@section('title','City | Edit')
 {{-- Page Content  title --}}
-@section('page-header',' Edit X Page')
+@section('page-header',' Edit City ')
 
 @section('content')
 
@@ -24,7 +24,9 @@
                   
                 </h3>
               </div>
-              {{html()->form('PUT')->route('')->open()}}
+
+
+              {{html()->form('PUT')->route('admin.cities.update',$city->id)->open()}}
               <div class="card-body">
                 <div class="form-group">
                   {{html()->label('Name')->for('name')}}
