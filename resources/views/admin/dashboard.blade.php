@@ -1,8 +1,13 @@
 @extends('layouts.master')
-
 @section('css')
-
 @stop
+
+{{-- Models for statistics --}}
+@inject('client','App\Models\Client')
+@inject('restaurant','App\Models\Restaurant')
+@inject('order','App\Models\Order')
+@inject('city','App\Models\City')
+
 
 {{-- browsr title --}}
 @section('title','Blank Page')
@@ -13,37 +18,12 @@
 <section class="content">
     <x-flash-success />
     <x-flash-error />
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Title</h3>
-
-        <div class="card-tools">
-          <button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="collapse"
-            title="Collapse"
-          >
-            <i class="fas fa-minus"></i>
-          </button>
-          <button
-            type="button"
-            class="btn btn-tool"
-            data-card-widget="remove"
-            title="Remove"
-          >
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        Start creating your amazing application!
-      </div>
-      <!-- /.card-body -->
-      <div class="card-footer">Footer</div>
-      <!-- /.card-footer-->
+    <div class="row">
+      <x-statistics-card :count="$order->count()" :category="'Total Orders'" :icon="'bag'" :bg="'blue'" :link="''"/>
+      <x-statistics-card :count="$restaurant->count()" :category="'Subscribed Restaurants'" :icon="'home'" :bg="'green'" :link="''"/>
+      <x-statistics-card :count="$client->count()" :category="'Active Clients'" :icon="'person-add'" :bg="'red'" :link="''"/>
+      <x-statistics-card :count="$city->count()" :category="'Coverd Cities'" :icon="'map'" :bg="'orange'" :link="''"/>
     </div>
-
   </section>
 @endsection
 
