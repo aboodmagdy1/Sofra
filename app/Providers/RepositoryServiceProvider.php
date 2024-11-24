@@ -7,6 +7,8 @@ use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
+use App\Repositories\Eloquent\UserRepository;
+use App\Services\Admin\AdminAuthService;
 use App\Services\Client\ClientService;
 use App\Services\OrderService;
 use App\Services\Restaurant\MealService;
@@ -46,6 +48,10 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(OrderService::class, function ($app) {
             return new OrderService($app->make(OrderRepository::class));
+        });
+
+        $this->app->bind(AdminAuthService::class, function ($app) {
+            return new AdminAuthService($app->make(UserRepository::class));
         });
     }
 
