@@ -15,7 +15,7 @@ class CreateForeignKeys extends Migration
 				->onUpdate('no action');
 		});
 		Schema::table('districts', function (Blueprint $table) {
-			$table->foreign('city_id')->references('id')->on('cites')
+			$table->foreign('city_id')->references('id')->on('cities')
 				->onDelete('no action')
 				->onUpdate('no action');
 		});

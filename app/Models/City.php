@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model 
+class City extends Model
 {
 
-    protected $table = 'cites';
+    protected $table = 'cities';
     public $timestamps = true;
     protected $fillable = array('name');
 
@@ -15,5 +15,4 @@ class City extends Model
     {
         return $this->hasMany('App\Models\District');
     }
-
 }
