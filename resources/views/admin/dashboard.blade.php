@@ -10,9 +10,9 @@
 
 
 {{-- browsr title --}}
-@section('title','Blank Page')
+@section('title','Sofra | Dashboard')
 {{-- Page Content  title --}}
-@section('page-header','Blank Page')
+@section('page-header','Statistics')
 
 @section('content')
 <section class="content">

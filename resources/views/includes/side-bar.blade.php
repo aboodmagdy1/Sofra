@@ -13,7 +13,7 @@
           <img src="{{asset('assets/img/user8-128x128.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Logged User Name</a>
+          <a href="{{route('admin.profile')}}" class="d-block"> {{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.roles.index')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-lock"></i>
               <p>
                 {{__('Roles')}}
@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.permissions.index')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-check"></i>
               <p>
                 {{__('Permissions')}}

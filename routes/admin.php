@@ -17,8 +17,10 @@ Route::middleware(['guest'])->controller(AuthController::class)->group(function 
 // auth user
 Route::middleware(['auth'])->controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::put('/profile', 'updateProfile')->name('updateProfile');
 });
 
-Route::middleware(['auth'])->controller(MainDashboardController::class)->group(function () {
-    Route::get('/',  'index')->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/',  [MainDashboardController::class, 'index'])->name('dashboard');
 });

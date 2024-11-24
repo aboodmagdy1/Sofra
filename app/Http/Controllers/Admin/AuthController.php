@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Requests\Admin\ResetPasswordRequest;
+use App\Http\Requests\Admin\UpdateProfileRequest;
 use App\Services\Admin\AdminAuthService;
 
 class AuthController extends Controller
@@ -54,6 +55,20 @@ class AuthController extends Controller
         $result = $this->service->resetPassword($request->validated());
         if ($result['status']) {
             return redirect()->route('admin.login')->with('success', 'Password Reseted successfully');
+        }
+        return back()->with('error', $result['message']);
+    }
+
+    public function profile()
+    {
+        return view('admin.auth.profile');
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $result = $this->service->updateProfile($request->validated());
+        if ($result['status']) {
+            return redirect()->route('admin.profile')->with('success', 'Profile updated successfully');
         }
         return back()->with('error', $result['message']);
     }

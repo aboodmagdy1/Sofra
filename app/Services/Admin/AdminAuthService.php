@@ -85,4 +85,28 @@ class AdminAuthService
         // 5) return success message
         return ['status' => true];
     }
+
+    public function updateProfile(array $data)
+    {
+        // 1) get the user
+        $user = request()->user();
+        // 2) update password if changed
+        if (isset($data['password'])) {
+            $user->password = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+            unset($data['confirm_password']);
+        }
+        // 3) update email if changed
+        if (isset($data['email']) && $data['email'] != $user->email) {
+            $user->email = $data['email'];
+        } else {
+            unset($data['email']);
+        }
+        // 4) update rest  of  field 
+        $user->fill($data);
+        $user->update();
+        // 5) return success message
+        return ['status' => true];
+    }
 }
