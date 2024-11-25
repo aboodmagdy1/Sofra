@@ -38,7 +38,7 @@ class CityController extends Controller
 
     public function edit(City $city)
     {
-        return view('cities.edit', compact('city'));
+        return view('cities.edit', ['record' => $city]);
     }
 
     public function update(Request $request, string $id)

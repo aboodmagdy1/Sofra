@@ -4,9 +4,9 @@
 @stop
 
 {{-- browsr title --}}
-@section('title','City | Edit')
+@section('title','Method | Edit')
 {{-- Page Content  title --}}
-@section('page-header',' Edit City ')
+@section('page-header',' Edit Method ')
 
 @section('content')
 
@@ -26,11 +26,11 @@
               </div>
 
 
-              {{html()->form('PUT')->route('admin.cities.update',$record->id)->open()}}
+              {{html()->form('PUT')->route('admin.payment-methods.update',$record->id)->open()}}
               <div class="card-body">
                 <div class="form-group">
                   {{html()->label('Name')->for('name')}}
-                  {{html()->text('name')->class('form-control')->placeholder('Enter Name')}}
+                  {{html()->text('name')->class('form-control')->placeholder('Enter Name')->value($record->name)}}
                   @error('name')
                   <span class="text-danger">{{$message}}</span>
                 @enderror
