@@ -9,7 +9,7 @@ class BaseRepository implements BaseRepositoryInterface
     public function __construct(protected $model) {}
     public function all()
     {
-        return   $this->model->all();
+        return   $this->model->paginate(5);
     }
 
     public function filter($filters)

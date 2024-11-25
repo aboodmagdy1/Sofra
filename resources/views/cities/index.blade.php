@@ -51,7 +51,9 @@
                       @endforeach
                       </tbody>
                 </table>
-
+                <div class="card-footer d-flex justify-content-center">
+                  {{ $records->links('pagination::bootstrap-4') }}
+              </div>
             
           @else
           <div class="text-bold text-center" role="alert">
