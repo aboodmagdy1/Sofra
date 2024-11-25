@@ -29,18 +29,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.cities.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-lock"></i>
+            <a href="{{route('admin.districts.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-map-pin"></i>
               <p>
-                {{__('Roles')}}
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-check"></i>
-              <p>
-                {{__('Permissions')}}
+                {{__('Districts')}}
               </p>
             </a>
           </li>

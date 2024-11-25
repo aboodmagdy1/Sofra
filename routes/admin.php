@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,5 @@ Route::middleware(['auth'])->controller(AuthController::class)->group(function (
 Route::middleware(['auth'])->group(function () {
     Route::get('/',  [MainDashboardController::class, 'index'])->name('dashboard');
     Route::resource('cities', CityController::class);
+    Route::resource('districts', DistrictController::class);
 });

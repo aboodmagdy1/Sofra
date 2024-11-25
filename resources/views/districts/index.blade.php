@@ -6,8 +6,10 @@
 {{-- browsr title --}}
 @section('title','Index Page')
 {{-- Page Content  title --}}
-@section('page-header','City Records')
+@section('page-header','District Records')
 
+
+@inject('cityModel','App\Models\City' )
 @section('content')
 <section class="content">
   <div class="container-fluid">
@@ -16,7 +18,7 @@
         <div class="card">
           <div class="card-header d-flex justify-content-center">
             <h3 class="card-title">
-              <a class="btn btn-primary" href={{route('admin.cities.create')}}> Create City</a>
+              <a class="btn btn-primary" href={{route('admin.districts.create')}}> Create District</a>
             </h3>
           </div>
           <x-flash-success/>
@@ -30,6 +32,7 @@
                       <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>City</th>
                         <th>Actions</th>
 
                       </tr>
@@ -39,9 +42,10 @@
                       <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$record->name}}</td>
+                        <td>{{$record->city->name}}</td>
                         <td class='d-flex gap-4'>
-                          <a  href="{{route('admin.cities.edit',$record->id)}}" class="btn btn-info mr-2">Edit</a>
-                        {{html()->form('DELETE')->route('admin.cities.destroy',$record->id)->open()}}
+                          <a  href="{{route('admin.districts.edit',$record->id)}}" class="btn btn-info mr-2">Edit</a>
+                        {{html()->form('DELETE')->route('admin.districts.destroy',$record->id)->open()}}
                         {{html()->button('Delete')->class('btn btn-danger')->type('submit')}}
 
 
@@ -51,7 +55,6 @@
                       @endforeach
                       </tbody>
                 </table>
-
             
           @else
           <div class="text-bold text-center" role="alert">
