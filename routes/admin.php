@@ -27,6 +27,8 @@ Route::middleware(['auth'])->controller(AuthController::class)->group(function (
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/',  [MainDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/settings',  [MainDashboardController::class, 'appSettings'])->name('settings');
+    Route::put('/settings',  [MainDashboardController::class, 'updateSettings'])->name('updateSettings');
     Route::resource('cities', CityController::class);
     Route::resource('districts', DistrictController::class);
     Route::resource('categories', CategoryController::class);

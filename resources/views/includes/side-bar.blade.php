@@ -22,7 +22,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="{{route('admin.cities.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-map"></i>
+              <i class="nav-icon fas fa-city"></i>
               <p>
                 Cities 
               </p>
@@ -30,7 +30,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('admin.districts.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
+              <i class="nav-icon fas fa-location-dot"></i>
               <p>
                 {{__('Districts')}}
               </p>
@@ -49,6 +49,14 @@
               <i class="nav-icon fas fa-money-check-dollar"></i>
               <p>
                 {{__('Payment Methods')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.settings')}}" class="nav-link">
+              <i class="nav-icon fas fa-gear "></i>
+              <p>
+                {{__('Settings')}}
               </p>
             </a>
           </li>
