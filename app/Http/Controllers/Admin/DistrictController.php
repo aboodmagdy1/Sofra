@@ -43,14 +43,14 @@ class DistrictController extends Controller
     }
 
 
-    public function update(Request $request, District $district)
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'name' => 'required|string',
             'city_id' => 'required|exists:cities,id'
         ]);
 
-        $result = $this->service->update($district, $request->only(['name', 'city_id']));
+        $result = $this->service->update($id, $request->only(['name', 'city_id']));
         if ($result['status']) {
             return redirect(route('admin.districts.index'))->with('success', "record updated successfuly ");
         }

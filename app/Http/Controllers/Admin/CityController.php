@@ -13,7 +13,7 @@ class CityController extends Controller
 
     public function index()
     {
-        $records = $this->service->index();
+        $records = $this->service->all();
         return view('cities.index', compact('records'));
     }
     public function create()
@@ -41,14 +41,14 @@ class CityController extends Controller
         return view('cities.edit', compact('city'));
     }
 
-    public function update(Request $request, City $city)
+    public function update(Request $request, string $id)
     {
         // 1) validate
         $request->validate([
             'name' => 'required|string'
         ]);
         // 2) update
-        $result = $this->service->update(['name' => $request->input('name')],  $city);
+        $result = $this->service->update($id, ['name' => $request->input('name')]);
         if ($result['status']) {
             return redirect(route('admin.cities.index'));
         }
@@ -56,9 +56,9 @@ class CityController extends Controller
         return back()->with($result['message']);
     }
 
-    public function destroy(City $city)
+    public function destroy(string $id)
     {
-        $result = $this->service->delete($city);
+        $result = $this->service->delete($id);
         if ($result['status']) {
             return redirect(route('admin.cities.index'))->with('success', 'City deleted');
         }
