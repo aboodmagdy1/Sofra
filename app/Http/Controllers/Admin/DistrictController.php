@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\District;
-use App\Services\DistrictService;
+use App\Services\Admin\DistrictService;
 use Illuminate\Http\Request;
 
 class DistrictController extends Controller

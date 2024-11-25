@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
-use App\Services\CityService;
+use App\Services\Admin\CityService;
 use Illuminate\Http\Request;
 
 class CityController extends Controller

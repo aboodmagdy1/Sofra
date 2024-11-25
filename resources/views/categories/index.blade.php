@@ -4,21 +4,19 @@
 @stop
 
 {{-- browsr title --}}
-@section('title','Index Page')
+@section('title','Category Page')
 {{-- Page Content  title --}}
-@section('page-header','District Records')
+@section('page-header','Category Records')
 
-
-@inject('cityModel','App\Models\City' )
 @section('content')
-<section class="content" >
+<section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-center">
             <h3 class="card-title">
-              <a class="btn btn-primary" href={{route('admin.districts.create')}}> Create District</a>
+              <a class="btn btn-primary" href={{route('admin.categories.create')}}> Create Category</a>
             </h3>
           </div>
           <x-flash-success/>
@@ -32,7 +30,6 @@
                       <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>City</th>
                         <th>Actions</th>
 
                       </tr>
@@ -42,10 +39,9 @@
                       <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$record->name}}</td>
-                        <td>{{$record->city->name}}</td>
                         <td class='d-flex gap-4'>
-                          <a  href="{{route('admin.districts.edit',$record->id)}}" class="btn btn-info mr-2">Edit</a>
-                        {{html()->form('DELETE')->route('admin.districts.destroy',$record->id)->open()}}
+                          <a  href="{{route('admin.categories.edit',$record->id)}}" class="btn btn-info mr-2">Edit</a>
+                        {{html()->form('DELETE')->route('admin.categories.destroy',$record->id)->open()}}
                         {{html()->button('Delete')->class('btn btn-danger')->type('submit')}}
 
 

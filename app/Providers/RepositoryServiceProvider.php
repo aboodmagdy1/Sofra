@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\ClientRepository;
 use App\Repositories\Eloquent\DistrictRepository;
@@ -11,9 +12,10 @@ use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Services\Admin\AdminAuthService;
-use App\Services\CityService;
+use App\Services\Admin\CategoryService;
+use App\Services\Admin\CityService;
 use App\Services\Client\ClientService;
-use App\Services\DistrictService;
+use App\Services\Admin\DistrictService;
 use App\Services\OrderService;
 use App\Services\Restaurant\MealService;
 use App\Services\Restaurant\OfferService;
@@ -63,6 +65,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(DistrictService::class, function ($app) {
             return new DistrictService($app->make(DistrictRepository::class));
+        });
+        $this->app->bind(CategoryService::class, function ($app) {
+            return new CategoryService($app->make(CategoryRepository::class));
         });
     }
 
