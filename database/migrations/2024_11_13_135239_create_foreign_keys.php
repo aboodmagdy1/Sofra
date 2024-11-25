@@ -11,32 +11,32 @@ class CreateForeignKeys extends Migration
 	{
 		Schema::table('restaurants', function (Blueprint $table) {
 			$table->foreign('district_id')->references('id')->on('districts')
-				->onDelete('no action')
+				->onDelete('set null')
 				->onUpdate('no action');
 		});
 		Schema::table('districts', function (Blueprint $table) {
 			$table->foreign('city_id')->references('id')->on('cities')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('reviews', function (Blueprint $table) {
 			$table->foreign('restaurant_id')->references('id')->on('restaurants')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('reviews', function (Blueprint $table) {
 			$table->foreign('client_id')->references('id')->on('clients')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('meals', function (Blueprint $table) {
 			$table->foreign('restaurant_id')->references('id')->on('restaurants')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('clients', function (Blueprint $table) {
 			$table->foreign('district_id')->references('id')->on('districts')
-				->onDelete('no action')
+				->onDelete('set null')
 				->onUpdate('no action');
 		});
 		Schema::table('orders', function (Blueprint $table) {
@@ -61,12 +61,12 @@ class CreateForeignKeys extends Migration
 		});
 		Schema::table('meal_order', function (Blueprint $table) {
 			$table->foreign('order_id')->references('id')->on('orders')
-				->onDelete('restrict')
-				->onUpdate('restrict');
+				->onDelete('cascade')
+				->onUpdate('cascade');
 		});
 		Schema::table('category_restaurant', function (Blueprint $table) {
 			$table->foreign('category_id')->references('id')->on('categories')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('category_restaurant', function (Blueprint $table) {
