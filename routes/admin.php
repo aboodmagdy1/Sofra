@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
 // auth guest
@@ -29,4 +30,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('cities', CityController::class);
     Route::resource('districts', DistrictController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('payment-methods', PaymentMethodController::class);
 });

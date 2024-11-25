@@ -26,7 +26,7 @@
               </div>
 
 
-              {{html()->form('PUT')->route('admin.cities.update',$city->id)->open()}}
+              {{html()->form('PUT')->route('admin.cities.update',$record->id)->open()}}
               <div class="card-body">
                 <div class="form-group">
                   {{html()->label('Name')->for('name')}}

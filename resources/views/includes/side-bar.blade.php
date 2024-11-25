@@ -44,6 +44,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.payment-methods.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-money-check-dollar"></i>
+              <p>
+                {{__('Payment Methods')}}
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
