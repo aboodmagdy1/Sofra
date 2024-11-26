@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\CommisionController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
 use App\Http\Controllers\Admin\PaymentMethodController;
@@ -33,4 +34,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('districts', DistrictController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('payment-methods', PaymentMethodController::class);
+    Route::resource('commisions', CommisionController::class);
 });

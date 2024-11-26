@@ -53,6 +53,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.commisions.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-sack-dollar "></i>
+              <p>
+                {{__('Commissions')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.settings')}}" class="nav-link">
               <i class="nav-icon fas fa-gear "></i>
               <p>

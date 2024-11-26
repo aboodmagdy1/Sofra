@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\ClientRepository;
+use App\Repositories\Eloquent\CommisionRepository;
 use App\Repositories\Eloquent\DistrictRepository;
 use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
@@ -15,6 +16,7 @@ use App\Repositories\Eloquent\UserRepository;
 use App\Services\Admin\AdminAuthService;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\CityService;
+use App\Services\Admin\CommisionService;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Client\ClientService;
 use App\Services\Admin\DistrictService;
@@ -73,6 +75,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(PaymentMethodService::class, function ($app) {
             return new PaymentMethodService($app->make(PaymentMethodRepository::class));
+        });
+        $this->app->bind(CommisionService::class, function ($app) {
+            return new CommisionService($app->make(CommisionRepository::class));
         });
     }
 
