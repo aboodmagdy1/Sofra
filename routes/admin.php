@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CommisionController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
+use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('payment-methods', PaymentMethodController::class);
     Route::resource('commisions', CommisionController::class);
+    Route::resource('offers', OfferController::class);
 });

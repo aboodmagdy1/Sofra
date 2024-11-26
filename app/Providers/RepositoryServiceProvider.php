@@ -17,6 +17,7 @@ use App\Services\Admin\AdminAuthService;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\CityService;
 use App\Services\Admin\CommisionService;
+use App\Services\Admin\DashBoardOfferService;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Client\ClientService;
 use App\Services\Admin\DistrictService;
@@ -60,6 +61,8 @@ class RepositoryServiceProvider extends ServiceProvider
             return new OrderService($app->make(OrderRepository::class));
         });
 
+
+        // Admin Services
         $this->app->bind(AdminAuthService::class, function ($app) {
             return new AdminAuthService($app->make(UserRepository::class));
         });
@@ -78,6 +81,10 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(CommisionService::class, function ($app) {
             return new CommisionService($app->make(CommisionRepository::class));
+        });
+
+        $this->app->bind(DashBoardOfferService::class, function ($app) {
+            return new DashBoardOfferService($app->make(OfferRepository::class));
         });
     }
 

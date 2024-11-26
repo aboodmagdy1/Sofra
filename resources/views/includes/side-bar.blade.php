@@ -61,6 +61,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.offers.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-percent "></i>
+              <p>
+                {{__('Offers')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.settings')}}" class="nav-link">
               <i class="nav-icon fas fa-gear "></i>
               <p>
