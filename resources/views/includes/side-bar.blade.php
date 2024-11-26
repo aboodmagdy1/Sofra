@@ -69,6 +69,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.contacts.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-address-book "></i>
+              <p>
+                {{__('Contacts')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.settings')}}" class="nav-link">
               <i class="nav-icon fas fa-gear "></i>
               <p>
