@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Offer extends Model 
+class Offer extends Model
 {
+    use FilterTrait;
 
     protected $table = 'offers';
     public $timestamps = true;
@@ -15,5 +17,4 @@ class Offer extends Model
     {
         return $this->belongsTo('App\Models\Restaurant');
     }
-
 }

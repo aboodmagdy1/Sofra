@@ -13,7 +13,10 @@ class CommisionController extends Controller
     public function __construct(private CommisionService $service) {}
     public function index()
     {
-        $records = $this->service->all();
+
+        $records = request()->filled('filters') ?
+            $this->service->filterd(request()->input('filters'))
+            : $this->service->all();
         return view('commisions.index', compact('records'));
     }
 

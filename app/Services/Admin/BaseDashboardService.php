@@ -16,6 +16,11 @@ class BaseDashboardService
         return $this->repository->all();
     }
 
+    public function filterd(array $filters)
+    {
+        return $this->repository->filter($filters);
+    }
+
     public function create(array $data)
     {
         try {

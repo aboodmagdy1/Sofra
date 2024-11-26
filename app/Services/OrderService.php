@@ -93,19 +93,24 @@ class OrderService
 
     public function currentClientOrders(): array
     {
-        $records = $this->repository->findByClientAndStatus(
-            request()->user()->id,
-            [OrderStatus::PENDING->value]
-        );
+
+        $records = $this->repository
+            ->filter([
+                'client_id' => request()->user()->id,
+                'status' => OrderStatus::PENDING->value
+            ]);
         return ['status' => true, 'data' => $records];
     }
 
     public function previousClientOrders()
     {
-        $records = $this->repository->findByClientAndStatus(
-            request()->user()->id,
-            [OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value]
-        );
+
+        $records = $this->repository
+            ->filter([
+                'client_id' => request()->user()->id,
+                'status' => [OrderStatus::REJECTED->value, OrderStatus::DELIVERED->value, OrderStatus::CANCELED->value]
+            ]);
+
         return ['status' => true, 'data' => $records];
     }
 
@@ -121,26 +126,32 @@ class OrderService
 
     public function restNewOrders()
     {
-        $orders =   $this->repository->findByRestaurantAndStatus(
-            request()->user()->id,
-            [OrderStatus::PENDING->value]
+        $orders =   $this->repository->filter(
+            [
+                'restaurant_id' => request()->user()->id,
+                'status' => OrderStatus::PENDING->value
+            ]
         );
         return ['status' => true, 'data' => $orders];
     }
     public function restCurrentOrders()
     {
-        $orders = $this->repository->findByRestaurantAndStatus(
-            request()->user()->id,
-            [OrderStatus::ACCEPTED->value]
+        $orders = $this->repository->filter(
+            [
+                'restaurant_id' => request()->user()->id,
+                'status' => OrderStatus::ACCEPTED->value
+            ]
         );
 
         return ['status' => true, 'data' => $orders];
     }
     public function restPreviousOrders()
     {
-        $orders =  $this->repository->findByRestaurantAndStatus(
-            request()->user()->id,
-            [OrderStatus::DELIVERED->value, OrderStatus::REJECTED->value, OrderStatus::CANCELED->value]
+        $orders =  $this->repository->filter(
+            [
+                'restaurant_id' => request()->user()->id,
+                'status' => [OrderStatus::DELIVERED->value, OrderStatus::REJECTED->value, OrderStatus::CANCELED->value]
+            ]
         );
 
         return ['status' => true, 'data' => $orders];
@@ -148,9 +159,11 @@ class OrderService
     public function  calculateCommission()
     {
         // get the total price of the orders
-        $orders = $this->repository->findByRestaurantAndStatus(
-            request()->user()->id,
-            [OrderStatus::DELIVERED->value]
+        $orders = $this->repository->filter(
+            [
+                'restaurant_id' => request()->user()->id,
+                'status' => OrderStatus::DELIVERED->value
+            ]
         );
         $total = $orders->sum('total_price');
         $net = $orders->sum('net');

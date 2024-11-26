@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Restaurant extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, FilterTrait;
     protected $table = 'restaurants';
     public $timestamps = true;
     protected $fillable = array('status', 'name', 'phone', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'contact_num', 'watts_num', 'image', 'password', 'reset_code', 'email');

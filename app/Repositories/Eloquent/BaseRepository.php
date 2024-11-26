@@ -14,13 +14,7 @@ class BaseRepository implements BaseRepositoryInterface
 
     public function filter($filters)
     {
-        $query = $this->model->query();
-        foreach ($filters as $key => $value) {
-            if (!is_null($value)) {
-                $query->where($key, $value);
-            }
-        }
-        return $query->get(); //return a collection
+        return $this->model->filter($filters)->paginate(5);
     }
 
     public function findBy($key, $value)

@@ -14,10 +14,26 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header d-flex justify-content-center">
+          <div class="card-header d-flex justify-content-between">
             <h3 class="card-title">
               <a class="btn btn-primary" href={{route('admin.commisions.create')}}> Add Commission</a>
             </h3>
+            <div class="d-flex align-items-center justify-content-between">
+
+              {{-- Filter --}}
+              {{ html()->form('GET')->route('admin.commisions.index')->open() }}
+              <div class="d-flex ">
+                  {{ html()->number('filters[restaurant_id]')->class('form-control mr-2')->placeholder('Restaurant ID') }}
+                  {{ html()->number('filters[amount]')->class('form-control mr-2')->placeholder('amount') }}
+                {{ html()->button('Filter')->type('submit')->class('btn btn-primary') }}
+              </div>
+              {{ html()->form()->close() }}
+
+              {{-- Reset --}}
+              {{ html()->form('GET')->route('admin.commisions.index')->open() }}
+                {{ html()->button('Reset')->type('submit')->class('btn btn-success  ml-1') }}
+              {{ html()->form()->close() }}
+          </div>
           </div>
           <x-flash-success/>
           <x-flash-error/>
