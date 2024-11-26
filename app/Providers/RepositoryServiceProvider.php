@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\CategoryRepository;
 use App\Repositories\Eloquent\CityRepository;
 use App\Repositories\Eloquent\ClientRepository;
 use App\Repositories\Eloquent\CommisionRepository;
+use App\Repositories\Eloquent\ContactRepository;
 use App\Repositories\Eloquent\DistrictRepository;
 use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
@@ -17,6 +18,7 @@ use App\Services\Admin\AdminAuthService;
 use App\Services\Admin\CategoryService;
 use App\Services\Admin\CityService;
 use App\Services\Admin\CommisionService;
+use App\Services\Admin\ContactService;
 use App\Services\Admin\DashBoardOfferService;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Client\ClientService;
@@ -85,6 +87,9 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->bind(DashBoardOfferService::class, function ($app) {
             return new DashBoardOfferService($app->make(OfferRepository::class));
+        });
+        $this->app->bind(ContactService::class, function ($app) {
+            return new ContactService($app->make(ContactRepository::class));
         });
     }
 

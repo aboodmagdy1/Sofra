@@ -6,7 +6,7 @@
 {{-- browsr title --}}
 @section('title','Index Page')
 {{-- Page Content  title --}}
-@section('page-header','Offers  Records')
+@section('page-header','Contacts Records')
 
 @section('content')
 <section class="content">
@@ -15,35 +15,36 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-center">
-            @if($records->count()>0)
             <div class="d-flex align-items-center justify-content-between">
 
               {{-- Filter --}}
-              {{ html()->form('GET')->route('admin.offers.index')->open() }}
+              {{ html()->form('GET')->route('admin.contacts.index')->open() }}
               <div class="d-flex ">
-                  {{ html()->text('restaurant_name')
-                  ->class('form-control mr-2')
-                  ->placeholder('Restaurant Name') 
-                  ->value(request()->input('restaurant_name'))
-                  }}
+                  {{html()->select('type',
+                  [
+                    'complaint'=>"Complaint" 
+                    ,'suggestion'=>"Suggestion"
+                    ,'query'=>"Query"
+                ],request()->input('type'),['class'=>'form-control mr-2 p-2'])}}
                   
-                {{ html()->button('Filter')->type('submit')->class('btn btn-primary') }}
+
+                {{ html()->button('Filter By Type ')->type('submit')->class('btn btn-primary') }}
               </div>
               {{ html()->form()->close() }}
 
               {{-- Reset --}}
-              {{ html()->form('GET')->route('admin.offers.index')->open() }}
+              {{ html()->form('GET')->route('admin.contacts.index')->open() }}
                 {{ html()->button('Reset')->type('submit')->class('btn btn-success  ml-1') }}
               {{ html()->form()->close() }}
      
           </div>
           <div class="d-block ml-2">
-                @error('restaurant_name')
+                @error('type')
                   <span class="text-danger">{{$message}}</span>
                   @enderror
               </div>
           </div>
-            @endif
+
             
          
           <x-flash-success/>
@@ -56,11 +57,11 @@
                   <thead>
                       <tr>
                         <th>#</th>
-                        <th>Restaurant Name</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Start Date </th>
-                        <th>End Date </th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Type</th>
+                        <th>Message </th>
                         <th>Actions</th>
 
                       </tr>
@@ -69,13 +70,13 @@
                       @foreach ($records as $record )
                       <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$record->restaurant->name}}</td>
-                        <td>{{$record->name}}</td>  
-                        <td>{{$record->description}}</td>
-                        <td>{{$record->start_date}}</td>  
-                        <td>{{$record->end_date}}</td>
+                        <td>{{$record->full_name}}</td>
+                        <td>{{$record->email}}</td>  
+                        <td>{{$record->phone}}</td>
+                        <td>{{$record->type}}</td>
+                        <td>{{$record->message}}</td>  
                         <td class='d-flex gap-4'>
-                        {{html()->form('DELETE')->route('admin.offers.destroy',$record->id)->open()}}
+                        {{html()->form('DELETE')->route('admin.contacts.destroy',$record->id)->open()}}
                         {{html()->button('Delete')->class('btn btn-danger')->type('submit')}}
                         {{html()->form()->close()}}
                         </td>
