@@ -13,7 +13,7 @@ This project  consist of :
 - Admin Dashboard .
 
 ## Features 
-- Well Designed Database
+- Well Designed Database [check it : http://www.laravelsd.com/share/rCOhPs]
 - Repo Desing Patter
 - Multi Auth usning (Sanctum)
 - Role and Permisssion Managment For admins
