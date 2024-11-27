@@ -71,7 +71,7 @@ class CreateForeignKeys extends Migration
 		});
 		Schema::table('category_restaurant', function (Blueprint $table) {
 			$table->foreign('restaurant_id')->references('id')->on('restaurants')
-				->onDelete('no action')
+				->onDelete('cascade')
 				->onUpdate('no action');
 		});
 		Schema::table('commission', function (Blueprint $table) {

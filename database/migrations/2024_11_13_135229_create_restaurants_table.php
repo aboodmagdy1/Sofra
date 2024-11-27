@@ -11,7 +11,8 @@ class CreateRestaurantsTable extends Migration
 		Schema::create('restaurants', function (Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->boolean('status');
+			$table->boolean('status')->comment('0 => closed , 1 => open');
+			$table->boolean('is_active')->default(1);
 			$table->string('name');
 			$table->string('email');
 			$table->string('phone');

@@ -16,6 +16,16 @@ class BaseDashboardService
         return $this->repository->all();
     }
 
+    public function find(string $id)
+    {
+        try {
+            return ['status' => true, 'data' => $this->repository->find($id)];
+        } catch (QueryException $e) {
+            return ['status' => false, 'message' => 'Database error , please try again '];
+        } catch (Exception $e) {
+            return ['status' => false, 'message' => 'server error when  finding record , try again '];
+        }
+    }
     public function filterd(array $filters)
     {
         return $this->repository->filter($filters);

@@ -20,6 +20,7 @@ use App\Services\Admin\CityService;
 use App\Services\Admin\CommisionService;
 use App\Services\Admin\ContactService;
 use App\Services\Admin\DashBoardOfferService;
+use App\Services\Admin\DashboardRestaurantService;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Client\ClientService;
 use App\Services\Admin\DistrictService;
@@ -90,6 +91,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(ContactService::class, function ($app) {
             return new ContactService($app->make(ContactRepository::class));
+        });
+        $this->app->bind(DashboardRestaurantService::class, function ($app) {
+            return new DashboardRestaurantService($app->make(RestaurantRepository::class));
         });
     }
 

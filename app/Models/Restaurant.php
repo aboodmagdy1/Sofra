@@ -15,7 +15,7 @@ class Restaurant extends Authenticatable
     use HasApiTokens, Notifiable, FilterTrait;
     protected $table = 'restaurants';
     public $timestamps = true;
-    protected $fillable = array('status', 'name', 'phone', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'contact_num', 'watts_num', 'image', 'password', 'reset_code', 'email');
+    protected $fillable = array('is_active', 'status', 'name', 'phone', 'district_id', 'min_order_price', 'delivery_price', 'avg_rate', 'contact_num', 'watts_num', 'image', 'password', 'reset_code', 'email');
     protected $hidden = ['password', 'reset_code'];
     public function district()
     {
