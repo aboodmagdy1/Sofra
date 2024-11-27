@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
 			$table->string('password');
 			$table->string('image')->nullable();
 			$table->string('reset_code')->nullable();
+			$table->boolean('is_active')->default(1);
 		});
 	}
 

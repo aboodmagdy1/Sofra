@@ -29,6 +29,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.clients.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-person-circle-plus"></i>
+              <p>
+                {{__('Clients')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.cities.index')}}" class="nav-link">
               <i class="nav-icon fas fa-city"></i>
               <p>
