@@ -21,15 +21,6 @@ class DashboardClientController extends Controller
         return view('clients.index', compact('records'));
     }
 
-    public function show(string $id)
-    {
-        $result  = $this->service->find($id);
-        if (!$result['status']) {
-            return redirect()->route('admin.clients.index')->with('error', $result['message']);
-        }
-
-        return view('clients.show', ['record' => $result['data']]);
-    }
     public function update(string $id)
     {
 

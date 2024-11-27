@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CommisionController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardClientController;
+use App\Http\Controllers\Admin\DashboardOrderController;
 use App\Http\Controllers\Admin\DashboardRestaurantController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
@@ -43,4 +44,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('contacts', ContactController::class);
     Route::resource('restaurants', DashboardRestaurantController::class);
     Route::resource('clients', DashboardClientController::class);
+    Route::resource('orders', DashboardOrderController::class);
+    Route::get('orders/print/{id}', [DashboardOrderController::class, 'print'])->name('orders.print');
 });

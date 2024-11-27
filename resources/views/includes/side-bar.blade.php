@@ -29,6 +29,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('admin.orders.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-cart-shopping"></i>
+              <p>
+                {{__('Orders')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('admin.clients.index')}}" class="nav-link">
               <i class="nav-icon fas fa-person-circle-plus"></i>
               <p>

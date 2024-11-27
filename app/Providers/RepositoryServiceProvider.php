@@ -21,6 +21,7 @@ use App\Services\Admin\CommisionService;
 use App\Services\Admin\ContactService;
 use App\Services\Admin\DashboardClientService;
 use App\Services\Admin\DashBoardOfferService;
+use App\Services\Admin\DashboardOrderService;
 use App\Services\Admin\DashboardRestaurantService;
 use App\Services\Admin\PaymentMethodService;
 use App\Services\Client\ClientService;
@@ -98,6 +99,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(DashboardClientService::class, function ($app) {
             return new DashboardClientService($app->make(ClientRepository::class));
+        });
+        $this->app->bind(DashboardOrderService::class, function ($app) {
+            return new DashboardOrderService($app->make(OrderRepository::class));
         });
     }
 

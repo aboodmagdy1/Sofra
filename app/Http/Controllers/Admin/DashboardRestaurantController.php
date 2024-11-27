@@ -13,7 +13,7 @@ class DashboardRestaurantController extends Controller
     public function index(Request $request)
     {
         // if serach : then get one record
-        if ($request->filled('filters')) {
+        if ($request->filled('filters.name' || $request->filled('filters.category_id'))) {
             $records = $this->service->filterd($request->filters);
         } else {
             $records = $this->service->all();
