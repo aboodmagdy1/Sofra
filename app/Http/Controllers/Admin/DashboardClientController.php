@@ -13,11 +13,7 @@ class DashboardClientController extends Controller
     public function index(Request $request)
     {
         // if serach : then get one record
-        if ($request->filled('name')) {
-            $records = $this->service->filterd(['name' => $request->name]);
-        } else {
-            $records = $this->service->all();
-        }
+        $records = $this->service->filterd(['name' => $request->name]);
         return view('clients.index', compact('records'));
     }
 

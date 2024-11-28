@@ -18,18 +18,17 @@
             <div class="d-flex align-items-center justify-content-between">
 
               {{ html()->form('GET')->route('admin.restaurants.index')->open() }}
-              <div class="d-flex ">
-                {{-- Search  --}}
-                  {{ html()->text('filters[name]')
-                  ->class('form-control mr-2')->placeholder('Restaurant Name') ->value(request()->input('filters.name'))}}
-                {{ html()->button('Search')->type('submit')->class('btn btn-primary') }}
+                <div class="d-flex ">
+                  {{-- Search  --}}
+                    {{ html()->text('filters[name]')
+                    ->class('form-control mr-2')->placeholder('Restaurant Name') ->value(request()->input('filters.name'))}}
 
-                {{-- Filter by category --}}
-                {{html()->select('filters[category_id]')->id('categories')->class('form-control mr-2')
-                ->placeholder('Select Category')->value(request()->input('filters.category_id'))}}
-                {{ html()->button('Filter')->type('submit')->class('btn btn-primary') }}
+                  {{-- Filter by category --}}
+                  {{html()->select('filters[category_id]')->id('categories')->class('form-control mr-2')
+                  ->placeholder('Select Category')->value(request()->input('filters.category_id'))}}
+                  {{ html()->button('Filter')->type('submit')->class('btn btn-primary') }}
 
-              </div>
+                </div>
               {{ html()->form()->close() }}
 
               {{-- Reset --}}
