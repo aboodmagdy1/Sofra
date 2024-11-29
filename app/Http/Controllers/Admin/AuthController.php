@@ -24,7 +24,7 @@ class AuthController extends Controller
         if ($result['status'] == 'success') {
             return redirect()->route('admin.dashboard')->with('success', 'Logged In successfyly');
         }
-        return back()->with('error', 'invalid credentals');
+        return back()->with('error', 'invalid credentals or account is not active');
     }
 
     public function logout()

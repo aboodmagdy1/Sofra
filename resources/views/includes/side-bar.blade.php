@@ -20,6 +20,32 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @if (Auth::user()->hasRole('admin'))
+          <li class="nav-item">
+            <a href="{{route('admin.users.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-shield"></i>
+              <p>
+                {{__('Users')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.roles.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                {{__('Roles')}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('admin.permissions.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-person-military-pointing"></i>
+              <p>
+                {{__('Permissions')}}
+              </p>
+            </a>
+          </li>
+          @endif
           <li class="nav-item">
             <a href="{{route('admin.restaurants.index')}}" class="nav-link">
               <i class="nav-icon fas fa-utensils"></i>

@@ -12,7 +12,9 @@ use App\Repositories\Eloquent\MealRepository;
 use App\Repositories\Eloquent\OfferRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Repositories\Eloquent\PaymentMethodRepository;
+use App\Repositories\Eloquent\PermissionRepository;
 use App\Repositories\Eloquent\RestaurantRepository;
+use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Services\Admin\AdminAuthService;
 use App\Services\Admin\CategoryService;
@@ -24,6 +26,9 @@ use App\Services\Admin\DashBoardOfferService;
 use App\Services\Admin\DashboardOrderService;
 use App\Services\Admin\DashboardRestaurantService;
 use App\Services\Admin\PaymentMethodService;
+use App\Services\Admin\PermissionService;
+use App\Services\Admin\RoleService;
+use App\Services\Admin\UserService;
 use App\Services\Client\ClientService;
 use App\Services\Admin\DistrictService;
 use App\Services\OrderService;
@@ -102,6 +107,15 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(DashboardOrderService::class, function ($app) {
             return new DashboardOrderService($app->make(OrderRepository::class));
+        });
+        $this->app->bind(UserService::class, function ($app) {
+            return new UserService($app->make(UserRepository::class));
+        });
+        $this->app->bind(RoleService::class, function ($app) {
+            return new RoleService($app->make(RoleRepository::class));
+        });
+        $this->app->bind(PermissionService::class, function ($app) {
+            return new PermissionService($app->make(PermissionRepository::class));
         });
     }
 

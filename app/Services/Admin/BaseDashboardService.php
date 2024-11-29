@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class BaseDashboardService
 {
@@ -37,9 +38,11 @@ class BaseDashboardService
             $this->repository->create($data);
             return ['status' => true];
         } catch (QueryException $e) {
+            Log::error($e->getMessage());
             return ['status' => false, 'message' => 'Database error , please try again '];
         } catch (Exception $e) {
-            return ['status' => false, 'message' => 'server error when  creating record , try again '];
+            Log::error($e->getMessage());
+            return ['status' => false, 'message' => $e->getMessage()];
         }
     }
 

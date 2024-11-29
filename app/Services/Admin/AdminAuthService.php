@@ -21,6 +21,12 @@ class AdminAuthService
         $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
+
+            if (!Auth::user()->is_active) {
+                Auth::logout();
+                return ['status' => 'fail'];
+            }
+
             return ['status' => 'success'];
         }
         return ['status' => 'fail'];

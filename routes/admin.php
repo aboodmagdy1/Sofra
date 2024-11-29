@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\MainDashboardController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 // auth guest
@@ -44,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('contacts', ContactController::class);
     Route::resource('restaurants', DashboardRestaurantController::class);
     Route::resource('clients', DashboardClientController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
     Route::resource('orders', DashboardOrderController::class);
     Route::get('orders/print/{id}', [DashboardOrderController::class, 'print'])->name('orders.print');
 });
