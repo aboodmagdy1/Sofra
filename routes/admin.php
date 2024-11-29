@@ -34,7 +34,7 @@ Route::middleware(['auth'])->controller(AuthController::class)->group(function (
     Route::put('/profile', 'updateProfile')->name('updateProfile');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'auto_check_permission'])->group(function () {
     Route::get('/',  [MainDashboardController::class, 'index'])->name('dashboard');
     Route::get('/settings',  [MainDashboardController::class, 'appSettings'])->name('settings');
     Route::put('/settings',  [MainDashboardController::class, 'updateSettings'])->name('updateSettings');

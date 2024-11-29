@@ -38,7 +38,7 @@
                       @foreach ($records as $record )
                       <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$record->name}}</td>
+                        <td>{{$record->display_name}}</td>
                         <td class='d-flex gap-4'>
                           <a  href="{{route('admin.permissions.edit',$record->id)}}" class="btn btn-info mr-2">Edit</a>
                         {{html()->form('DELETE')->route('admin.permissions.destroy',$record->id)->open()}}
