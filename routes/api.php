@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Client\AuthController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,4 +16,9 @@ Route::controller(GeneralController::class)->group(function () {
     Route::get('/restaurants/{id}', 'show_restaurant');
     Route::get('/settings', 'settings');
     Route::post('/contact', 'contact');
+});
+
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::post('/payment/process', 'processPayment');
 });
